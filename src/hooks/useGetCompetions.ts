@@ -12,11 +12,17 @@ type UseGetCompetitions = {
 
 export const useGetCompetitions = ({ db }: UseGetCompetitionsArgs): UseGetCompetitions => {
   const [competitions, setCompetitions] = useState<Competition[]>([])
-  
+
   const fetchCompetitions = async (db: Firestore) => {
     try {
       const querySnapshot = await getDocs(collection(db, 'competitions'))
-      const data = querySnapshot.docs.map(doc => doc.data() as Competition)
+      const data = querySnapshot.docs.map(doc => {
+        const docData = doc.data()
+        return {
+          ...docData,
+          createdAt: docData.createdAt.toDate()
+        } as Competition
+      })
       setCompetitions(data)
     } catch (error) {
       console.error('getCompetitions error: ', error)
