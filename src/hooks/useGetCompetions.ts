@@ -1,5 +1,5 @@
 import { collection, Firestore, getDocs, } from "firebase/firestore"
-import { Competition } from "../util/type"
+import { Competition } from "../util/types"
 import { useEffect, useState } from "react"
 
 type UseGetCompetitionsArgs = {
@@ -19,8 +19,15 @@ export const useGetCompetitions = ({ db }: UseGetCompetitionsArgs): UseGetCompet
       const data = querySnapshot.docs.map(doc => {
         const docData = doc.data()
         return {
-          ...docData,
-          createdAt: docData.createdAt.toDate()
+          id: doc.id,
+          name: docData.name,
+          ageCategory: docData.ageCategory.split(','),
+          eventCategory: docData.eventCategory.split(','),
+          date: docData.date.toDate(),
+          subscriptionDeadlineDate: docData.subscriptionDeadlineDate.toDate(),
+          url: docData.url,
+          notes: docData.notes,
+          registrationDate: docData.registrationDate.toDate(),
         } as Competition
       })
       setCompetitions(data)
