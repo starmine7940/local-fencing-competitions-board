@@ -16,8 +16,10 @@ export const List = ({competitions}: ListArgs) => {
       <Table.Header>
         <Table.Row>
           <Table.ColumnHeader>大会名</Table.ColumnHeader>
-          <Table.ColumnHeader>年齢区分</Table.ColumnHeader>
+          <Table.ColumnHeader>大会名</Table.ColumnHeader>
           <Table.ColumnHeader>種目</Table.ColumnHeader>
+          <Table.ColumnHeader>性別</Table.ColumnHeader>
+          <Table.ColumnHeader>年齢区分</Table.ColumnHeader>
           <Table.ColumnHeader>開催日</Table.ColumnHeader>
           <Table.ColumnHeader>申込締切日</Table.ColumnHeader>
           <Table.ColumnHeader>URL</Table.ColumnHeader>
@@ -30,8 +32,10 @@ export const List = ({competitions}: ListArgs) => {
         {competitions.map((competition) => (
           <Table.Row key={competition.id}>
             <Table.Cell>{competition.name}</Table.Cell>
-            <Table.Cell>{competition.ageCategory}</Table.Cell>
+            <Table.Cell>{competition.site}</Table.Cell>
             <Table.Cell>{competition.eventCategory}</Table.Cell>
+            <Table.Cell>{competition.genderCategory}</Table.Cell>
+            <Table.Cell>{competition.ageCategory}</Table.Cell>
             <Table.Cell>{competition.date.toDateString()}</Table.Cell>
             <Table.Cell>{competition.subscriptionDeadlineDate.toDateString()}</Table.Cell>
             <Table.Cell>{competition.url}</Table.Cell>

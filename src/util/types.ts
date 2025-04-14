@@ -1,8 +1,10 @@
 export type Competition = {
   id: string,
   name: string,
-  ageCategory: string[],
+  site: string,
   eventCategory: string[],
+  genderCategory: string[],
+  ageCategory: string[],
   date: Date,
   subscriptionDeadlineDate: Date,
   url: string,

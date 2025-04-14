@@ -21,14 +21,16 @@ export const useGetCompetitions = ({ db }: UseGetCompetitionsArgs): UseGetCompet
         return {
           id: doc.id,
           name: docData.name,
-          ageCategory: docData.ageCategory.split(','),
+          site: docData.site,
           eventCategory: docData.eventCategory.split(','),
+          genderCategory: docData.genderCategory.split(','),
+          ageCategory: docData.ageCategory.split(','),
           date: docData.date.toDate(),
           subscriptionDeadlineDate: docData.subscriptionDeadlineDate.toDate(),
           url: docData.url,
           notes: docData.notes,
           registrationDate: docData.registrationDate.toDate(),
-        } as Competition
+        }
       })
       setCompetitions(data)
     } catch (error) {
