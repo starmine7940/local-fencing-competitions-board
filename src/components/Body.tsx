@@ -2,6 +2,7 @@
 import { Firestore } from "firebase/firestore"
 import { useGetCompetitions } from "../hooks/useGetCompetions"
 import { List } from "./List"
+import { Form } from "./Form"
 
 // const useStyles = createUseStyles({})
 
@@ -16,6 +17,9 @@ export const Body = ({db}: BodyArgs) => {
   console.log(competitions)
 
   return (
-    <List competitions={competitions}/>
+    <>
+      <Form db={db}/>
+      <List competitions={competitions}/>
+    </>
   )
 }
