@@ -26,7 +26,8 @@ export const List = ({ competitions }: ListArgs) => {
           <Table.ColumnHeader>URL</Table.ColumnHeader>
           <Table.ColumnHeader>備考</Table.ColumnHeader>
           <Table.ColumnHeader>登録日</Table.ColumnHeader>
-          <Table.ColumnHeader>削除</Table.ColumnHeader>
+          {/* <Table.ColumnHeader>削除</Table.ColumnHeader> */}{' '}
+          {/* TODO: 削除機能の実装 */}
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -47,7 +48,7 @@ export const List = ({ competitions }: ListArgs) => {
             <Table.Cell>
               {competition.registrationDate.toDateString()}
             </Table.Cell>
-            <Table.Cell>🗑️</Table.Cell>
+            {/* <Table.Cell>🗑️</Table.Cell> */} {/* TODO: 削除機能の実装 */}
           </Table.Row>
         ))}
       </Table.Body>
