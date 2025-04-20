@@ -10,12 +10,28 @@ const ageCategoryEnum = z.enum(ageCategories)
 export const competitionSchema = z.object({
   name: z.string().min(1, '大会名は必須です'),
   site: z.string().min(1, '会場は必須です'),
-  eventCategory: z.array(eventCategoryEnum).min(1, '少なくとも1つ選んでください'),
-  genderCategory: z.array(genderCategoryEnum).min(1, '少なくとも1つ選んでください'),
+  eventCategory: z
+    .array(eventCategoryEnum)
+    .min(1, '少なくとも1つ選んでください'),
+  genderCategory: z
+    .array(genderCategoryEnum)
+    .min(1, '少なくとも1つ選んでください'),
   ageCategory: z.array(ageCategoryEnum).min(1, '少なくとも1つ選んでください'),
-  startDate: z.date({ required_error: '開始日は必須です' }),
-  finishDate: z.date({ required_error: '終了日は必須です' }),
-  subscriptionDeadlineDate: z.date(),
+  startDate: z.date().nullable(),
+  // TODO: 必須入力にする
+  // .refine((val): val is Date => val instanceof Date, {
+  //   message: '開始日は必須です',
+  // }),
+  finishDate: z.date().nullable(),
+  // TODO: 必須入力にする
+  // .refine((val): val is Date => val instanceof Date, {
+  //   message: '終了日は必須です',
+  // }),
+  subscriptionDeadlineDate: z.date().nullable(),
+  // TODO: 必須入力にする
+  // .refine((val): val is Date => val instanceof Date, {
+  //   message: '申込締切日は必須です',
+  // }),
   url: z
     .string()
     .refine(
@@ -33,9 +49,9 @@ export const defaultValues: CompetitionForm = {
   eventCategory: [],
   genderCategory: [],
   ageCategory: [],
-  startDate: new Date(),
-  finishDate: new Date(),
-  subscriptionDeadlineDate: new Date(),
+  startDate: null,
+  finishDate: null,
+  subscriptionDeadlineDate: null,
   url: '',
   notes: '',
 }

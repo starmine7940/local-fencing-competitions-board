@@ -37,10 +37,10 @@ export const List = ({ competitions }: ListArgs) => {
             <Table.Cell>{competition.eventCategory}</Table.Cell>
             <Table.Cell>{competition.genderCategory}</Table.Cell>
             <Table.Cell>{competition.ageCategory}</Table.Cell>
-            <Table.Cell>{competition.startDate.toDateString()}</Table.Cell>
-            <Table.Cell>{competition.finishDate.toDateString()}</Table.Cell>
+            <Table.Cell>{competition.startDate?.toDateString()}</Table.Cell>
+            <Table.Cell>{competition.finishDate?.toDateString()}</Table.Cell>
             <Table.Cell>
-              {competition.subscriptionDeadlineDate.toDateString()}
+              {competition.subscriptionDeadlineDate?.toDateString()}
             </Table.Cell>
             <Table.Cell>{competition.url}</Table.Cell>
             <Table.Cell>{competition.notes}</Table.Cell>

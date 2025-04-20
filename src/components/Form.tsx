@@ -131,6 +131,7 @@ export const Form = ({ db }: FormArgs) => {
                 selected={field.value}
                 onChange={field.onChange}
                 dateFormat="yyyy/MM/dd"
+                placeholderText="日付を選択"
               />
             )}
           />
@@ -145,6 +146,7 @@ export const Form = ({ db }: FormArgs) => {
                 selected={field.value}
                 onChange={field.onChange}
                 dateFormat="yyyy/MM/dd"
+                placeholderText="日付を選択"
               />
             )}
           />
@@ -159,6 +161,7 @@ export const Form = ({ db }: FormArgs) => {
                 selected={field.value}
                 onChange={field.onChange}
                 dateFormat="yyyy/MM/dd"
+                placeholderText="日付を選択"
               />
             )}
           />
