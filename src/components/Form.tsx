@@ -1,4 +1,3 @@
-// import { createUseStyles } from "react-jss"
 import {
   Box,
   Button,
@@ -11,46 +10,13 @@ import {
 } from '@chakra-ui/react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Controller, useController, useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { CompetitionWithoutId } from '../util/types'
+import { Controller } from 'react-hook-form'
 import { addDoc, collection, Firestore } from 'firebase/firestore'
-// import { CompetitionForm } from '../util/types'
+import { CompetitionForm, CompetitionWithoutId } from '../util/types'
+import { useCompetitionForm } from '../hooks/useCompetitionForm'
 
-// const useStyles = createUseStyles({})
-
-const competitionSchema = z.object({
-  name: z.string().min(1, '大会名は必須です'),
-  site: z.string().min(1, '会場は必須です'),
-  eventCategory: z.array(z.string()).min(1, '少なくとも1つ選んでください'),
-  genderCategory: z.array(z.string()).min(1, '少なくとも1つ選んでください'),
-  ageCategory: z.array(z.string()).min(1, '少なくとも1つ選んでください'),
-  startDate: z.date(),
-  finishDate: z.date(),
-  subscriptionDeadlineDate: z.date(),
-  url: z
-    .string()
-    .refine(
-      (val) => val === '' || z.string().url().safeParse(val).success,
-      '有効なURLを入力してください'
-    ),
-  notes: z.string(),
-})
-
-type CompetitionForm = z.infer<typeof competitionSchema>
-
-const defaultValues: CompetitionForm = {
-  name: '',
-  site: '',
-  eventCategory: [],
-  genderCategory: [],
-  ageCategory: [],
-  startDate: new Date(),
-  finishDate: new Date(),
-  subscriptionDeadlineDate: new Date(),
-  url: '',
-  notes: '',
+type FormArgs = {
+  db: Firestore
 }
 
 const eventCategoryItems = [
@@ -74,36 +40,22 @@ const ageCategoryItems = [
   { label: 'ベテラン', value: 'ベテラン' },
 ]
 
-type FormArgs = {
-  db: Firestore
-}
-
 export const Form = ({ db }: FormArgs) => {
-  // const classes = useStyles()
-
   const {
     handleSubmit,
     control,
     register,
-    formState: { errors },
-  } = useForm<CompetitionForm>({
-    defaultValues,
-    resolver: zodResolver(competitionSchema),
-  })
+    eventCategory,
+    genderCategory,
+    ageCategory,
+    invalidEventCategory,
+    invalidGenderCategory,
+    invalidAgeCategory,
+  } = useCompetitionForm()
 
-  const eventCategory = useController({ control, name: 'eventCategory' })
-  const genderCategory = useController({ control, name: 'genderCategory' })
-  const ageCategory = useController({ control, name: 'ageCategory' })
-  // const date = useController({ control, name: "date" })
-  // const subscriptionDeadlineDate = useController({ control, name: "subscriptionDeadlineDate" })
-
-  const invalidEventCategory = !!errors.eventCategory
-  const invalidGenderCategory = !!errors.eventCategory
-  const invalidAgeCategory = !!errors.eventCategory
-
-  const onSubmit = async (competitionForm: CompetitionForm) => {
+  const onSubmit = async (formData: CompetitionForm) => {
     const competionWithoutId: CompetitionWithoutId = {
-      ...competitionForm,
+      ...formData,
       registrationDate: new Date(),
     }
     const docRef = await addDoc(
@@ -115,7 +67,7 @@ export const Form = ({ db }: FormArgs) => {
 
   return (
     <Box borderWidth="1px" borderColor="red">
-      <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Field.Root>
           <Field.Label>大会名</Field.Label>
           <Input {...register('name')} />
@@ -130,7 +82,6 @@ export const Form = ({ db }: FormArgs) => {
             invalid={invalidEventCategory}
             value={eventCategory.field.value}
             onValueChange={eventCategory.field.onChange}
-            name={eventCategory.field.name}
           >
             <Fieldset.Content>
               {eventCategoryItems.map((item) => (
@@ -146,10 +97,9 @@ export const Form = ({ db }: FormArgs) => {
         <Fieldset.Root invalid={invalidGenderCategory}>
           <Fieldset.Legend>性別</Fieldset.Legend>
           <CheckboxGroup
-            invalid={invalidEventCategory}
+            invalid={invalidGenderCategory}
             value={genderCategory.field.value}
             onValueChange={genderCategory.field.onChange}
-            name={genderCategory.field.name}
           >
             <Fieldset.Content>
               {genderCategoryItems.map((item) => (
@@ -168,7 +118,6 @@ export const Form = ({ db }: FormArgs) => {
             invalid={invalidAgeCategory}
             value={ageCategory.field.value}
             onValueChange={ageCategory.field.onChange}
-            name={ageCategory.field.name}
           >
             <Fieldset.Content>
               {ageCategoryItems.map((item) => (
@@ -189,7 +138,7 @@ export const Form = ({ db }: FormArgs) => {
             render={({ field }) => (
               <DatePicker
                 selected={field.value}
-                onChange={(value) => field.onChange(value)}
+                onChange={field.onChange}
                 dateFormat="yyyy/MM/dd"
               />
             )}
@@ -203,7 +152,7 @@ export const Form = ({ db }: FormArgs) => {
             render={({ field }) => (
               <DatePicker
                 selected={field.value}
-                onChange={(value) => field.onChange(value)}
+                onChange={field.onChange}
                 dateFormat="yyyy/MM/dd"
               />
             )}
@@ -217,7 +166,7 @@ export const Form = ({ db }: FormArgs) => {
             render={({ field }) => (
               <DatePicker
                 selected={field.value}
-                onChange={(value) => field.onChange(value)}
+                onChange={field.onChange}
                 dateFormat="yyyy/MM/dd"
               />
             )}
