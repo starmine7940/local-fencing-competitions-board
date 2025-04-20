@@ -1,6 +1,7 @@
 // import { createUseStyles } from "react-jss"
 import { Table } from '@chakra-ui/react'
 import { Competition } from '../util/types'
+import { formatDate } from '../util/functions'
 
 // const useStyles = createUseStyles({})
 
@@ -12,7 +13,8 @@ export const List = ({ competitions }: ListArgs) => {
   // const classes = useStyles()
 
   return (
-    <Table.ScrollArea borderWidth="1px"> {/* TODO: 最大幅の指定 */}
+    <Table.ScrollArea borderWidth="1px">
+      {/* TODO: 最大幅の指定 */}
       <Table.Root showColumnBorder>
         <Table.Header>
           <Table.Row bg="bg.subtle">
@@ -27,7 +29,7 @@ export const List = ({ competitions }: ListArgs) => {
             <Table.ColumnHeader>URL</Table.ColumnHeader>
             <Table.ColumnHeader>備考</Table.ColumnHeader>
             <Table.ColumnHeader>登録日</Table.ColumnHeader>
-            {/* <Table.ColumnHeader>削除</Table.ColumnHeader> */}{' '}
+            {/* <Table.ColumnHeader>削除</Table.ColumnHeader> */}
             {/* TODO: 削除機能の実装 */}
           </Table.Row>
         </Table.Header>
@@ -39,15 +41,15 @@ export const List = ({ competitions }: ListArgs) => {
               <Table.Cell>{competition.eventCategory}</Table.Cell>
               <Table.Cell>{competition.genderCategory}</Table.Cell>
               <Table.Cell>{competition.ageCategory}</Table.Cell>
-              <Table.Cell>{competition.startDate?.toDateString()}</Table.Cell>
-              <Table.Cell>{competition.finishDate?.toDateString()}</Table.Cell>
+              <Table.Cell>{formatDate(competition.startDate)}</Table.Cell>
+              <Table.Cell>{formatDate(competition.finishDate)}</Table.Cell>
               <Table.Cell>
-                {competition.subscriptionDeadlineDate?.toDateString()}
+                {formatDate(competition.subscriptionDeadlineDate)}
               </Table.Cell>
               <Table.Cell>{competition.url}</Table.Cell>
               <Table.Cell>{competition.notes}</Table.Cell>
               <Table.Cell>
-                {competition.registrationDate.toDateString()}
+                {formatDate(competition.registrationDate)}
               </Table.Cell>
               {/* <Table.Cell>🗑️</Table.Cell> */} {/* TODO: 削除機能の実装 */}
             </Table.Row>
