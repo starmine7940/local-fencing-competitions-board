@@ -62,7 +62,9 @@ export const useCompetitionForm = () => {
     defaultValues,
     resolver: zodResolver(competitionSchema),
   })
-
+  const reset = () => {
+    form.reset(defaultValues)
+  }
   const eventCategory = useController({
     control: form.control,
     name: 'eventCategory',
@@ -78,6 +80,7 @@ export const useCompetitionForm = () => {
 
   return {
     ...form,
+    reset,
     eventCategory,
     genderCategory,
     ageCategory,

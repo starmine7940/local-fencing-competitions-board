@@ -39,6 +39,7 @@ export const Form = ({ db }: FormArgs) => {
     handleSubmit,
     control,
     register,
+    reset,
     formState,
     eventCategory,
     genderCategory,
@@ -46,15 +47,17 @@ export const Form = ({ db }: FormArgs) => {
   } = useCompetitionForm()
 
   const onSubmit = async (formData: CompetitionForm) => {
-    const competionWithoutId: CompetitionWithoutId = {
-      ...formData,
-      registrationDate: new Date(),
+    // TODO: fetch status のハンドリング
+    try {
+      const competionWithoutId: CompetitionWithoutId = {
+        ...formData,
+        registrationDate: new Date(),
+      }
+      await addDoc(collection(db, 'competitions'), competionWithoutId)
+      reset()
+    } catch (error) {
+      console.error(error)
     }
-    const docRef = await addDoc(
-      collection(db, 'competitions'),
-      competionWithoutId
-    )
-    console.log('Document written with ID: ', docRef.id)
   }
 
   return (
