@@ -1,8 +1,20 @@
-// import { createUseStyles } from "react-jss"
-
-// const useStyles = createUseStyles({})
+import { Box, Button, Flex, Heading } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 
 export const Header = () => {
-  // const classes = useStyles()
-  return <div>header</div>
+  return (
+    <Box>
+      <Flex direction="column" align="center">
+        <Heading>フェンシング ローカル大会掲示板</Heading>
+        <Flex gap="10px">
+          <Button>
+            <Link to="/view">大会を探す</Link>
+          </Button>
+          <Button>
+            <Link to="registration">大会を登録する</Link>
+          </Button>
+        </Flex>
+      </Flex>
+    </Box>
+  )
 }

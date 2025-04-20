@@ -1,17 +1,12 @@
-// import { createUseStyles } from "react-jss"
 import { Table } from '@chakra-ui/react'
 import { Competition } from '../util/types'
 import { formatDate } from '../util/functions'
-
-// const useStyles = createUseStyles({})
 
 type ListArgs = {
   competitions: Competition[]
 }
 
 export const List = ({ competitions }: ListArgs) => {
-  // const classes = useStyles()
-
   return (
     <Table.ScrollArea borderWidth="1px">
       {/* TODO: 最大幅の指定 */}
