@@ -14,7 +14,7 @@ export const RegisterCaution = () => {
             </List.Item>
             <List.Item>
               大会の情報が重複して登録されないよう、「
-              <Span color='blue.solid'>
+              <Span color="blue.solid">
                 <Link to="/">大会を探す</Link>
               </Span>
               」から既に大会が登録済みでないことを確認してください。

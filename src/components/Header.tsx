@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export const Header = () => {
   return (
     <Box backgroundColor="orange" colorPalette="orange">
-      <Flex direction="column" align="center" gap='10px' padding='10px'>
+      <Flex direction="column" align="center" gap="10px" padding="10px">
         <Heading size="3xl" color="white">
           フェンシング ローカル大会掲示板
         </Heading>
