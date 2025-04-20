@@ -1,52 +1,132 @@
 import { Table } from '@chakra-ui/react'
 import { Competition } from '../util/types'
 import { formatDate } from '../util/functions'
+import { useMemo, useState } from 'react'
+import {
+  useReactTable,
+  flexRender,
+  getCoreRowModel,
+  ColumnDef,
+  SortingState,
+  getSortedRowModel,
+} from '@tanstack/react-table'
 
 type CompetitionsTableArgs = {
   competitions: Competition[]
 }
 
 export const CompetitionsTable = ({ competitions }: CompetitionsTableArgs) => {
+  const [sorting, setSorting] = useState<SortingState>([])
+
+  const columns = useMemo<ColumnDef<Competition>[]>(
+    () => [
+      {
+        accessorKey: 'name',
+        header: '大会名',
+      },
+      {
+        accessorKey: 'site',
+        header: '会場',
+      },
+      {
+        accessorKey: 'eventCategory',
+        header: '種目',
+        cell: (info) => info.getValue<string[]>().join(', '),
+      },
+      {
+        accessorKey: 'genderCategory',
+        header: '性別',
+        cell: (info) => info.getValue<string[]>().join(', '),
+      },
+      {
+        accessorKey: 'ageCategory',
+        header: '年齢区分',
+        cell: (info) => info.getValue<string[]>().join(', '),
+      },
+      {
+        accessorKey: 'startDate',
+        header: '大会開始日',
+        cell: (info) => formatDate(info.getValue<Date | null>()),
+        sortingFn: 'datetime',
+      },
+      {
+        accessorKey: 'finishDate',
+        header: '大会終了日',
+        cell: (info) => formatDate(info.getValue<Date | null>()),
+        sortingFn: 'datetime',
+      },
+      {
+        accessorKey: 'subscriptionDeadlineDate',
+        header: '申込締切日',
+        cell: (info) => formatDate(info.getValue<Date | null>()),
+        sortingFn: 'datetime',
+      },
+      {
+        accessorKey: 'url',
+        header: 'URL',
+      },
+      {
+        accessorKey: 'notes',
+        header: '備考',
+      },
+      {
+        accessorKey: 'registrationDate',
+        header: '登録日',
+        cell: (info) => formatDate(info.getValue<Date>()),
+        sortingFn: 'datetime',
+      },
+    ],
+    []
+  )
+
+  const table = useReactTable({
+    data: competitions,
+    columns,
+    state: { sorting },
+    onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+  })
+
   return (
     <Table.ScrollArea borderWidth="1px">
-      {/* TODO: 最大幅の指定 */}
       <Table.Root showColumnBorder>
         <Table.Header>
-          <Table.Row bg="bg.subtle">
-            <Table.ColumnHeader>大会名</Table.ColumnHeader>
-            <Table.ColumnHeader>会場</Table.ColumnHeader>
-            <Table.ColumnHeader>種目</Table.ColumnHeader>
-            <Table.ColumnHeader>性別</Table.ColumnHeader>
-            <Table.ColumnHeader>年齢区分</Table.ColumnHeader>
-            <Table.ColumnHeader>大会開始日</Table.ColumnHeader>
-            <Table.ColumnHeader>大会終了日</Table.ColumnHeader>
-            <Table.ColumnHeader>申込締切日</Table.ColumnHeader>
-            <Table.ColumnHeader>URL</Table.ColumnHeader>
-            <Table.ColumnHeader>備考</Table.ColumnHeader>
-            <Table.ColumnHeader>登録日</Table.ColumnHeader>
-            {/* <Table.ColumnHeader>削除</Table.ColumnHeader> */}
-            {/* TODO: 削除機能の実装 */}
-          </Table.Row>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <Table.Row bg="bg.subtle" id={headerGroup.id}>
+              {headerGroup.headers.map((header) => {
+                const isSortable = header.column.getCanSort()
+                return (
+                  <Table.ColumnHeader
+                    key={header.id}
+                    onClick={
+                      isSortable
+                        ? header.column.getToggleSortingHandler()
+                        : undefined
+                    }
+                  >
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+                    {{
+                      asc: ' 🔼',
+                      desc: ' 🔽',
+                    }[header.column.getIsSorted() as string] ?? ''}
+                  </Table.ColumnHeader>
+                )
+              })}
+            </Table.Row>
+          ))}
         </Table.Header>
         <Table.Body>
-          {competitions.map((competition) => (
-            <Table.Row key={competition.id}>
-              <Table.Cell>{competition.name}</Table.Cell>
-              <Table.Cell>{competition.site}</Table.Cell>
-              <Table.Cell>{competition.eventCategory}</Table.Cell>
-              <Table.Cell>{competition.genderCategory}</Table.Cell>
-              <Table.Cell>{competition.ageCategory}</Table.Cell>
-              <Table.Cell>{formatDate(competition.startDate)}</Table.Cell>
-              <Table.Cell>{formatDate(competition.finishDate)}</Table.Cell>
-              <Table.Cell>
-                {formatDate(competition.subscriptionDeadlineDate)}
-              </Table.Cell>
-              <Table.Cell>{competition.url}</Table.Cell>
-              <Table.Cell>{competition.notes}</Table.Cell>
-              <Table.Cell>
-                {formatDate(competition.registrationDate)}
-              </Table.Cell>
-              {/* <Table.Cell>🗑️</Table.Cell> */} {/* TODO: 削除機能の実装 */}
+          {table.getRowModel().rows.map((row) => (
+            <Table.Row id={row.id}>
+              {row.getVisibleCells().map((cell) => (
+                <Table.Cell key={cell.id}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </Table.Cell>
+              ))}
             </Table.Row>
           ))}
         </Table.Body>
