@@ -61,7 +61,7 @@ export const CompetitionsRegisterForm = ({ db }: CompetitionsRegisterFormArgs) =
   }
 
   return (
-    <Box borderWidth="1px" borderColor="red">
+    <Box colorPalette='orange'>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack gap="30px">
           <Field.Root invalid={!!formState.errors.name}>
@@ -220,7 +220,6 @@ export const CompetitionsRegisterForm = ({ db }: CompetitionsRegisterFormArgs) =
           <Button
             size="sm"
             type="submit"
-            alignSelf="flex-start"
             disabled={!formState.isValid}
           >
             登録
