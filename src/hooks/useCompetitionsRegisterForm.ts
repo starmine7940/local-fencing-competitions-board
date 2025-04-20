@@ -38,7 +38,7 @@ export const competitionSchema = z.object({
       (val) => val === '' || z.string().url().safeParse(val).success,
       '有効なURLを入力してください'
     ),
-  notes: z.string(),
+  notes: z.string().max(300, `300文字以内で入力してください`),
 })
 
 export type CompetitionForm = z.infer<typeof competitionSchema>

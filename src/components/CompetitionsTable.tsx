@@ -1,4 +1,4 @@
-import { Table } from '@chakra-ui/react'
+import { Box, Table } from '@chakra-ui/react'
 import { Competition } from '../util/types'
 import { formatDate } from '../util/functions'
 import { useMemo, useState } from 'react'
@@ -124,7 +124,9 @@ export const CompetitionsTable = ({ competitions }: CompetitionsTableArgs) => {
             <Table.Row id={row.id}>
               {row.getVisibleCells().map((cell) => (
                 <Table.Cell key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  <Box maxW="xl" wordBreak="break-word" whiteSpace="normal">
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </Box>
                 </Table.Cell>
               ))}
             </Table.Row>

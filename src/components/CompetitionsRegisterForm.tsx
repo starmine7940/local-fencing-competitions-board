@@ -234,6 +234,9 @@ export const CompetitionsRegisterForm = ({
           <Field.Root invalid={!!formState.errors.notes}>
             <Field.Label>備考 (任意)</Field.Label>
             <Textarea {...register('notes')} />
+            {!!formState.errors.notes && (
+              <Field.ErrorText>300文字以内で入力してください</Field.ErrorText> // TODO: 固定のエラー文言を使う
+            )}
           </Field.Root>
           <Button
             size="sm"
