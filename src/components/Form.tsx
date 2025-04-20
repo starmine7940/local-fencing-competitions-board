@@ -54,16 +54,22 @@ export const Form = ({ db }: FormArgs) => {
     <Box borderWidth="1px" borderColor="red">
       <form onSubmit={handleSubmit(onSubmit)}>
         <Field.Root invalid={!!formState.errors.name}>
-          <Field.Label>大会名</Field.Label>
+          <Field.Label>大会名 (必須)</Field.Label>
           <Input {...register('name')} />
+          {!!formState.errors.name && (
+            <Field.ErrorText>大会名は必須です</Field.ErrorText> // TODO: 固定のエラー文言を使う
+          )}
         </Field.Root>
         <Field.Root invalid={!!formState.errors.site}>
-          <Field.Label>会場</Field.Label>
+          <Field.Label>会場 (必須)</Field.Label>
           <Input {...register('site')} />
+          {!!formState.errors.site && (
+            <Field.ErrorText>会場は必須です</Field.ErrorText> // TODO: 固定のエラー文言を使う
+          )}
         </Field.Root>
 
         <Fieldset.Root invalid={!!formState.errors.eventCategory}>
-          <Fieldset.Legend>種目</Fieldset.Legend>
+          <Fieldset.Legend>種目 (必須)</Fieldset.Legend>
           <CheckboxGroup
             invalid={!!formState.errors.eventCategory}
             value={eventCategory.field.value}
@@ -79,10 +85,13 @@ export const Form = ({ db }: FormArgs) => {
               ))}
             </Fieldset.Content>
           </CheckboxGroup>
+          {!!formState.errors.eventCategory && (
+            <Fieldset.ErrorText>少なくとも1つ選んでください</Fieldset.ErrorText> // TODO: 固定のエラー文言を使う
+          )}
         </Fieldset.Root>
 
         <Fieldset.Root invalid={!!formState.errors.genderCategory}>
-          <Fieldset.Legend>性別</Fieldset.Legend>
+          <Fieldset.Legend>性別 (必須)</Fieldset.Legend>
           <CheckboxGroup
             invalid={!!formState.errors.genderCategory}
             value={genderCategory.field.value}
@@ -98,10 +107,13 @@ export const Form = ({ db }: FormArgs) => {
               ))}
             </Fieldset.Content>
           </CheckboxGroup>
+          {!!formState.errors.genderCategory && (
+            <Fieldset.ErrorText>少なくとも1つ選んでください</Fieldset.ErrorText> // TODO: 固定のエラー文言を使う
+          )}
         </Fieldset.Root>
 
         <Fieldset.Root invalid={!!formState.errors.ageCategory}>
-          <Fieldset.Legend>年齢</Fieldset.Legend>
+          <Fieldset.Legend>年齢 (必須)</Fieldset.Legend>
           <CheckboxGroup
             invalid={!!formState.errors.ageCategory}
             value={ageCategory.field.value}
@@ -117,10 +129,13 @@ export const Form = ({ db }: FormArgs) => {
               ))}
             </Fieldset.Content>
           </CheckboxGroup>
+          {!!formState.errors.ageCategory && (
+            <Fieldset.ErrorText>少なくとも1つ選んでください</Fieldset.ErrorText> // TODO: 固定のエラー文言を使う
+          )}
         </Fieldset.Root>
 
         <Field.Root invalid={!!formState.errors.startDate}>
-          <Field.Label>開始日</Field.Label>
+          <Field.Label>開始日 (任意)</Field.Label> {/* TODO: 必須にする */}
           <Controller
             name="startDate"
             control={control}
@@ -133,9 +148,12 @@ export const Form = ({ db }: FormArgs) => {
               />
             )}
           />
+          {!!formState.errors.startDate && (
+            <Field.ErrorText>開始日は必須です</Field.ErrorText> // TODO: 固定のエラー文言を使う
+          )}
         </Field.Root>
         <Field.Root invalid={!!formState.errors.finishDate}>
-          <Field.Label>終了日</Field.Label>
+          <Field.Label>終了日 (任意)</Field.Label> {/* TODO: 必須にする */}
           <Controller
             name="finishDate"
             control={control}
@@ -148,9 +166,12 @@ export const Form = ({ db }: FormArgs) => {
               />
             )}
           />
+          {!!formState.errors.finishDate && (
+            <Field.ErrorText>終了日は必須です</Field.ErrorText> // TODO: 固定のエラー文言を使う
+          )}
         </Field.Root>
         <Field.Root invalid={!!formState.errors.subscriptionDeadlineDate}>
-          <Field.Label>申込締切日</Field.Label>
+          <Field.Label>申込締切日 (任意)</Field.Label> {/* TODO: 必須にする */}
           <Controller
             name="subscriptionDeadlineDate"
             control={control}
@@ -163,16 +184,27 @@ export const Form = ({ db }: FormArgs) => {
               />
             )}
           />
+          {!!formState.errors.subscriptionDeadlineDate && (
+            <Field.ErrorText>申込締切日は必須です</Field.ErrorText> // TODO: 固定のエラー文言を使う
+          )}
         </Field.Root>
         <Field.Root invalid={!!formState.errors.url}>
-          <Field.Label>大会ページURL</Field.Label>
+          <Field.Label>大会ページURL (任意)</Field.Label>
           <Input {...register('url')} />
+          {!!formState.errors.url && (
+            <Field.ErrorText>有効なURLを入力してください</Field.ErrorText> // TODO: 固定のエラー文言を使う
+          )}
         </Field.Root>
         <Field.Root invalid={!!formState.errors.notes}>
-          <Field.Label>備考</Field.Label>
+          <Field.Label>備考 (任意)</Field.Label>
           <Textarea {...register('notes')} />
         </Field.Root>
-        <Button size="sm" type="submit" alignSelf="flex-start" disabled={!formState.isValid}>
+        <Button
+          size="sm"
+          type="submit"
+          alignSelf="flex-start"
+          disabled={!formState.isValid}
+        >
           登録
         </Button>
       </form>

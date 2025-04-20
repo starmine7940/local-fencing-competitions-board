@@ -58,6 +58,7 @@ export const defaultValues: CompetitionForm = {
 
 export const useCompetitionForm = () => {
   const form = useForm<CompetitionForm>({
+    mode: 'onChange',
     defaultValues,
     resolver: zodResolver(competitionSchema),
   })
