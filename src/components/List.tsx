@@ -16,7 +16,7 @@ export const List = ({ competitions }: ListArgs) => {
       <Table.Header>
         <Table.Row>
           <Table.ColumnHeader>大会名</Table.ColumnHeader>
-          <Table.ColumnHeader>大会名</Table.ColumnHeader>
+          <Table.ColumnHeader>会場</Table.ColumnHeader>
           <Table.ColumnHeader>種目</Table.ColumnHeader>
           <Table.ColumnHeader>性別</Table.ColumnHeader>
           <Table.ColumnHeader>年齢区分</Table.ColumnHeader>
