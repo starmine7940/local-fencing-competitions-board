@@ -29,7 +29,12 @@ const competitionSchema = z.object({
   startDate: z.date(),
   finishDate: z.date(),
   subscriptionDeadlineDate: z.date(),
-  url: z.string().url('有効なURLを入力してください'),
+  url: z
+    .string()
+    .refine(
+      (val) => val === '' || z.string().url().safeParse(val).success,
+      '有効なURLを入力してください'
+    ),
   notes: z.string(),
 })
 
