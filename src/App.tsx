@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import { Header } from './components/Header'
 import { CompetitionsViewPage } from './components/CompetitionsViewPage'
 import { CompetitionsRegisterPage } from './components/CompetitionsRegisterPage'
