@@ -1,7 +1,7 @@
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom'
 import { Header } from './components/Header'
-import { ViewPage } from './components/ViewPage'
-import { RegistrationPage } from './components/RegistrationPage'
+import { CompetitionsViewPage } from './components/CompetitionsViewPage'
+import { CompetitionsRegisterPage } from './components/CompetitionsRegisterPage'
 import { useFirebaseApp } from './hooks/useFirebaseApp'
 import { useFirebaseDb } from './hooks/useFirebaseDb'
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react'
@@ -15,9 +15,8 @@ export const App = () => {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<Navigate to="/list" />} />
-          <Route path="/view" element={<ViewPage db={db} />} />
-          <Route path="/registration" element={<RegistrationPage db={db} />} />
+          <Route path="/" element={<CompetitionsViewPage db={db} />} />
+          <Route path="/new" element={<CompetitionsRegisterPage db={db} />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>

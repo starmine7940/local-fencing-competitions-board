@@ -56,7 +56,7 @@ export const defaultValues: CompetitionForm = {
   notes: '',
 }
 
-export const useCompetitionForm = () => {
+export const useCompetitionsRegisterForm = () => {
   const form = useForm<CompetitionForm>({
     mode: 'onChange',
     defaultValues,

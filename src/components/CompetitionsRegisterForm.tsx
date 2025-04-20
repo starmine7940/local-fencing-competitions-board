@@ -15,14 +15,14 @@ import { Controller } from 'react-hook-form'
 import { addDoc, collection, Firestore } from 'firebase/firestore'
 import {
   ageCategories,
-  CompetitionForm,
+  CompetitionRegisterForm,
   CompetitionWithoutId,
   eventCategories,
   genderCategories,
 } from '../util/types'
-import { useCompetitionForm } from '../hooks/useCompetitionForm'
+import { useCompetitionsRegisterForm } from '../hooks/useCompetitionsRegisterForm'
 
-type FormArgs = {
+type CompetitionsRegisterFormArgs = {
   db: Firestore
 }
 
@@ -34,7 +34,7 @@ const eventCategoryItems = toLabelValueItems(eventCategories)
 const genderCategoryItems = toLabelValueItems(genderCategories)
 const ageCategoryItems = toLabelValueItems(ageCategories)
 
-export const Form = ({ db }: FormArgs) => {
+export const CompetitionsRegisterForm = ({ db }: CompetitionsRegisterFormArgs) => {
   const {
     handleSubmit,
     control,
@@ -44,9 +44,9 @@ export const Form = ({ db }: FormArgs) => {
     eventCategory,
     genderCategory,
     ageCategory,
-  } = useCompetitionForm()
+  } = useCompetitionsRegisterForm()
 
-  const onSubmit = async (formData: CompetitionForm) => {
+  const onSubmit = async (formData: CompetitionRegisterForm) => {
     // TODO: fetch status のハンドリング
     try {
       const competionWithoutId: CompetitionWithoutId = {

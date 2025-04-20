@@ -2,11 +2,11 @@ import { Table } from '@chakra-ui/react'
 import { Competition } from '../util/types'
 import { formatDate } from '../util/functions'
 
-type ListArgs = {
+type CompetitionsTableArgs = {
   competitions: Competition[]
 }
 
-export const List = ({ competitions }: ListArgs) => {
+export const CompetitionsTable = ({ competitions }: CompetitionsTableArgs) => {
   return (
     <Table.ScrollArea borderWidth="1px">
       {/* TODO: 最大幅の指定 */}
