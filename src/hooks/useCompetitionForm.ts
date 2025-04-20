@@ -75,17 +75,10 @@ export const useCompetitionForm = () => {
     name: 'ageCategory',
   })
 
-  const invalidEventCategory = !!form.formState.errors.eventCategory
-  const invalidGenderCategory = !!form.formState.errors.genderCategory
-  const invalidAgeCategory = !!form.formState.errors.ageCategory
-
   return {
     ...form,
     eventCategory,
     genderCategory,
     ageCategory,
-    invalidEventCategory,
-    invalidGenderCategory,
-    invalidAgeCategory,
   }
 }

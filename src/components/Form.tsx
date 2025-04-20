@@ -32,12 +32,10 @@ export const Form = ({ db }: FormArgs) => {
     handleSubmit,
     control,
     register,
+    formState,
     eventCategory,
     genderCategory,
     ageCategory,
-    invalidEventCategory,
-    invalidGenderCategory,
-    invalidAgeCategory,
   } = useCompetitionForm()
 
   const onSubmit = async (formData: CompetitionForm) => {
@@ -55,19 +53,19 @@ export const Form = ({ db }: FormArgs) => {
   return (
     <Box borderWidth="1px" borderColor="red">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Field.Root>
+        <Field.Root invalid={!!formState.errors.name}>
           <Field.Label>大会名</Field.Label>
           <Input {...register('name')} />
         </Field.Root>
-        <Field.Root>
+        <Field.Root invalid={!!formState.errors.site}>
           <Field.Label>会場</Field.Label>
           <Input {...register('site')} />
         </Field.Root>
 
-        <Fieldset.Root invalid={invalidEventCategory}>
+        <Fieldset.Root invalid={!!formState.errors.eventCategory}>
           <Fieldset.Legend>種目</Fieldset.Legend>
           <CheckboxGroup
-            invalid={invalidEventCategory}
+            invalid={!!formState.errors.eventCategory}
             value={eventCategory.field.value}
             onValueChange={eventCategory.field.onChange}
           >
@@ -83,10 +81,10 @@ export const Form = ({ db }: FormArgs) => {
           </CheckboxGroup>
         </Fieldset.Root>
 
-        <Fieldset.Root invalid={invalidGenderCategory}>
+        <Fieldset.Root invalid={!!formState.errors.genderCategory}>
           <Fieldset.Legend>性別</Fieldset.Legend>
           <CheckboxGroup
-            invalid={invalidGenderCategory}
+            invalid={!!formState.errors.genderCategory}
             value={genderCategory.field.value}
             onValueChange={genderCategory.field.onChange}
           >
@@ -102,10 +100,10 @@ export const Form = ({ db }: FormArgs) => {
           </CheckboxGroup>
         </Fieldset.Root>
 
-        <Fieldset.Root invalid={invalidAgeCategory}>
+        <Fieldset.Root invalid={!!formState.errors.ageCategory}>
           <Fieldset.Legend>年齢</Fieldset.Legend>
           <CheckboxGroup
-            invalid={invalidAgeCategory}
+            invalid={!!formState.errors.ageCategory}
             value={ageCategory.field.value}
             onValueChange={ageCategory.field.onChange}
           >
@@ -121,7 +119,7 @@ export const Form = ({ db }: FormArgs) => {
           </CheckboxGroup>
         </Fieldset.Root>
 
-        <Field.Root>
+        <Field.Root invalid={!!formState.errors.startDate}>
           <Field.Label>開始日</Field.Label>
           <Controller
             name="startDate"
@@ -136,7 +134,7 @@ export const Form = ({ db }: FormArgs) => {
             )}
           />
         </Field.Root>
-        <Field.Root>
+        <Field.Root invalid={!!formState.errors.finishDate}>
           <Field.Label>終了日</Field.Label>
           <Controller
             name="finishDate"
@@ -151,7 +149,7 @@ export const Form = ({ db }: FormArgs) => {
             )}
           />
         </Field.Root>
-        <Field.Root>
+        <Field.Root invalid={!!formState.errors.subscriptionDeadlineDate}>
           <Field.Label>申込締切日</Field.Label>
           <Controller
             name="subscriptionDeadlineDate"
@@ -166,15 +164,15 @@ export const Form = ({ db }: FormArgs) => {
             )}
           />
         </Field.Root>
-        <Field.Root>
+        <Field.Root invalid={!!formState.errors.url}>
           <Field.Label>大会ページURL</Field.Label>
           <Input {...register('url')} />
         </Field.Root>
-        <Field.Root>
+        <Field.Root invalid={!!formState.errors.notes}>
           <Field.Label>備考</Field.Label>
           <Textarea {...register('notes')} />
         </Field.Root>
-        <Button size="sm" type="submit" alignSelf="flex-start">
+        <Button size="sm" type="submit" alignSelf="flex-start" disabled={!formState.isValid}>
           登録
         </Button>
       </form>
