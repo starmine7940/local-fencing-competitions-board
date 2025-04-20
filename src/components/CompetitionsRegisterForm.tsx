@@ -21,6 +21,7 @@ import {
   genderCategories,
 } from '../util/types'
 import { useCompetitionsRegisterForm } from '../hooks/useCompetitionsRegisterForm'
+import { Toaster, toaster } from './ui/toaster'
 
 type CompetitionsRegisterFormArgs = {
   db: Firestore
@@ -34,7 +35,9 @@ const eventCategoryItems = toLabelValueItems(eventCategories)
 const genderCategoryItems = toLabelValueItems(genderCategories)
 const ageCategoryItems = toLabelValueItems(ageCategories)
 
-export const CompetitionsRegisterForm = ({ db }: CompetitionsRegisterFormArgs) => {
+export const CompetitionsRegisterForm = ({
+  db,
+}: CompetitionsRegisterFormArgs) => {
   const {
     handleSubmit,
     control,
@@ -46,8 +49,21 @@ export const CompetitionsRegisterForm = ({ db }: CompetitionsRegisterFormArgs) =
     ageCategory,
   } = useCompetitionsRegisterForm()
 
+  const createSuccessToast = () => {
+    toaster.create({
+      title: `登録に成功しました。`,
+      type: 'success',
+    })
+  }
+
+  const createErrorToast = () => {
+    toaster.create({
+      title: `登録に失敗しました。`,
+      type: 'error',
+    })
+  }
+
   const onSubmit = async (formData: CompetitionRegisterForm) => {
-    // TODO: fetch status のハンドリング
     try {
       const competionWithoutId: CompetitionWithoutId = {
         ...formData,
@@ -55,13 +71,15 @@ export const CompetitionsRegisterForm = ({ db }: CompetitionsRegisterFormArgs) =
       }
       await addDoc(collection(db, 'competitions'), competionWithoutId)
       reset()
+      createSuccessToast()
     } catch (error) {
       console.error(error)
+      createErrorToast()
     }
   }
 
   return (
-    <Box colorPalette='orange'>
+    <Box colorPalette="orange">
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack gap="30px">
           <Field.Root invalid={!!formState.errors.name}>
@@ -221,11 +239,13 @@ export const CompetitionsRegisterForm = ({ db }: CompetitionsRegisterFormArgs) =
             size="sm"
             type="submit"
             disabled={!formState.isValid}
+            loading={formState.isSubmitting}
           >
             登録
           </Button>
         </Stack>
       </form>
+      <Toaster />
     </Box>
   )
 }
