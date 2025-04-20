@@ -12,33 +12,20 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { Controller } from 'react-hook-form'
 import { addDoc, collection, Firestore } from 'firebase/firestore'
-import { CompetitionForm, CompetitionWithoutId } from '../util/types'
+import { ageCategories, CompetitionForm, CompetitionWithoutId, eventCategories, genderCategories } from '../util/types'
 import { useCompetitionForm } from '../hooks/useCompetitionForm'
 
 type FormArgs = {
   db: Firestore
 }
 
-const eventCategoryItems = [
-  { label: 'エペ', value: 'エペ' },
-  { label: 'フルーレ', value: 'フルーレ' },
-  { label: 'サーブル', value: 'サーブル' },
-]
+const toLabelValueItems = <T extends readonly string[]>(items: T) => {
+  return items.map((item) => ({ label: item, value: item }))
+}
 
-const genderCategoryItems = [
-  { label: '女性', value: '女性' },
-  { label: '男性', value: '男性' },
-]
-
-const ageCategoryItems = [
-  { label: '未就学児', value: '未就学児' },
-  { label: '小学生', value: '小学生' },
-  { label: '中学生', value: '中学生' },
-  { label: '高校生', value: '高校生' },
-  { label: '大学生', value: '大学生' },
-  { label: '大人', value: '大人' },
-  { label: 'ベテラン', value: 'ベテラン' },
-]
+const eventCategoryItems = toLabelValueItems(eventCategories)
+const genderCategoryItems = toLabelValueItems(genderCategories)
+const ageCategoryItems = toLabelValueItems(ageCategories)
 
 export const Form = ({ db }: FormArgs) => {
   const {
@@ -76,6 +63,7 @@ export const Form = ({ db }: FormArgs) => {
           <Field.Label>会場</Field.Label>
           <Input {...register('site')} />
         </Field.Root>
+
         <Fieldset.Root invalid={invalidEventCategory}>
           <Fieldset.Legend>種目</Fieldset.Legend>
           <CheckboxGroup
@@ -94,6 +82,7 @@ export const Form = ({ db }: FormArgs) => {
             </Fieldset.Content>
           </CheckboxGroup>
         </Fieldset.Root>
+
         <Fieldset.Root invalid={invalidGenderCategory}>
           <Fieldset.Legend>性別</Fieldset.Legend>
           <CheckboxGroup
@@ -112,6 +101,7 @@ export const Form = ({ db }: FormArgs) => {
             </Fieldset.Content>
           </CheckboxGroup>
         </Fieldset.Root>
+
         <Fieldset.Root invalid={invalidAgeCategory}>
           <Fieldset.Legend>年齢</Fieldset.Legend>
           <CheckboxGroup
@@ -130,6 +120,7 @@ export const Form = ({ db }: FormArgs) => {
             </Fieldset.Content>
           </CheckboxGroup>
         </Fieldset.Root>
+
         <Field.Root>
           <Field.Label>開始日</Field.Label>
           <Controller
