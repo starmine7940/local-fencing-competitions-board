@@ -1,12 +1,12 @@
 // import { useEffect } from "react"
-import { Body } from "./components/Body"
-import { Header } from "./components/Header"
-import { useFirebaseApp } from "./hooks/useFirebaseApp"
-import { useFirebaseDb } from "./hooks/useFirebaseDb"
+import { Body } from './components/Body'
+import { Header } from './components/Header'
+import { useFirebaseApp } from './hooks/useFirebaseApp'
+import { useFirebaseDb } from './hooks/useFirebaseDb'
 
 export const App = () => {
-  const {app} = useFirebaseApp()
-  const {db} = useFirebaseDb({app})
+  const { app } = useFirebaseApp()
+  const { db } = useFirebaseDb({ app })
 
   // useEffect(() => {
   //   console.log('app', app)
@@ -15,7 +15,7 @@ export const App = () => {
   return (
     <>
       <Header />
-      <Body db={db}/>
+      <Body db={db} />
     </>
   )
 }

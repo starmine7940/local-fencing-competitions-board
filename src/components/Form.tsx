@@ -1,4 +1,3 @@
-
 // import { createUseStyles } from "react-jss"
 import {
   Box,
@@ -12,9 +11,9 @@ import {
 } from '@chakra-ui/react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Controller, useController, useForm } from "react-hook-form"
-import { z } from "zod"
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Controller, useController, useForm } from 'react-hook-form'
+import { z } from 'zod'
 import { CompetitionWithoutId } from '../util/types'
 import { addDoc, collection, Firestore } from 'firebase/firestore'
 // import { CompetitionForm } from '../util/types'
@@ -22,15 +21,15 @@ import { addDoc, collection, Firestore } from 'firebase/firestore'
 // const useStyles = createUseStyles({})
 
 const competitionSchema = z.object({
-  name: z.string().min(1, "大会名は必須です"),
-  site: z.string().min(1, "会場は必須です"),
-  eventCategory: z.array(z.string()).min(1, "少なくとも1つ選んでください"),
-  genderCategory: z.array(z.string()).min(1, "少なくとも1つ選んでください"),
-  ageCategory: z.array(z.string()).min(1, "少なくとも1つ選んでください"),
+  name: z.string().min(1, '大会名は必須です'),
+  site: z.string().min(1, '会場は必須です'),
+  eventCategory: z.array(z.string()).min(1, '少なくとも1つ選んでください'),
+  genderCategory: z.array(z.string()).min(1, '少なくとも1つ選んでください'),
+  ageCategory: z.array(z.string()).min(1, '少なくとも1つ選んでください'),
   startDate: z.date(),
   finishDate: z.date(),
   subscriptionDeadlineDate: z.date(),
-  url: z.string().url("有効なURLを入力してください"),
+  url: z.string().url('有効なURLを入力してください'),
   notes: z.string(),
 })
 
@@ -46,18 +45,18 @@ const defaultValues: CompetitionForm = {
   finishDate: new Date(),
   subscriptionDeadlineDate: new Date(),
   url: '',
-  notes: ''
+  notes: '',
 }
 
 const eventCategoryItems = [
-  { label: "エペ", value: "エペ" },
-  { label: "フルーレ", value: "フルーレ" },
-  { label: "サーブル", value: "サーブル" },
+  { label: 'エペ', value: 'エペ' },
+  { label: 'フルーレ', value: 'フルーレ' },
+  { label: 'サーブル', value: 'サーブル' },
 ]
 
 const genderCategoryItems = [
-  { label: "女性", value: "女性" },
-  { label: "男性", value: "男性" },
+  { label: '女性', value: '女性' },
+  { label: '男性', value: '男性' },
 ]
 
 const ageCategoryItems = [
@@ -71,12 +70,12 @@ const ageCategoryItems = [
 ]
 
 type FormArgs = {
-  db: Firestore,
+  db: Firestore
 }
 
-export const Form = ({db}: FormArgs) => {
+export const Form = ({ db }: FormArgs) => {
   // const classes = useStyles()
-  
+
   const {
     handleSubmit,
     control,
@@ -87,9 +86,9 @@ export const Form = ({db}: FormArgs) => {
     resolver: zodResolver(competitionSchema),
   })
 
-  const eventCategory = useController({ control, name: "eventCategory" })
-  const genderCategory = useController({ control, name: "genderCategory" })
-  const ageCategory = useController({ control, name: "ageCategory" })
+  const eventCategory = useController({ control, name: 'eventCategory' })
+  const genderCategory = useController({ control, name: 'genderCategory' })
+  const ageCategory = useController({ control, name: 'ageCategory' })
   // const date = useController({ control, name: "date" })
   // const subscriptionDeadlineDate = useController({ control, name: "subscriptionDeadlineDate" })
 
@@ -100,10 +99,13 @@ export const Form = ({db}: FormArgs) => {
   const onSubmit = async (competitionForm: CompetitionForm) => {
     const competionWithoutId: CompetitionWithoutId = {
       ...competitionForm,
-      registrationDate: new Date()
+      registrationDate: new Date(),
     }
-    const docRef = await addDoc(collection(db, "competitions"), competionWithoutId);
-    console.log("Document written with ID: ", docRef.id)
+    const docRef = await addDoc(
+      collection(db, 'competitions'),
+      competionWithoutId
+    )
+    console.log('Document written with ID: ', docRef.id)
   }
 
   return (
@@ -111,11 +113,11 @@ export const Form = ({db}: FormArgs) => {
       <form onSubmit={handleSubmit((data) => onSubmit(data))}>
         <Field.Root>
           <Field.Label>大会名</Field.Label>
-          <Input {...register("name")} />
+          <Input {...register('name')} />
         </Field.Root>
         <Field.Root>
           <Field.Label>会場</Field.Label>
-          <Input {...register("site")} />
+          <Input {...register('site')} />
         </Field.Root>
         <Fieldset.Root invalid={invalidEventCategory}>
           <Fieldset.Legend>種目</Fieldset.Legend>
@@ -218,16 +220,16 @@ export const Form = ({db}: FormArgs) => {
         </Field.Root>
         <Field.Root>
           <Field.Label>大会ページURL</Field.Label>
-          <Input {...register("url")} />
+          <Input {...register('url')} />
         </Field.Root>
         <Field.Root>
           <Field.Label>備考</Field.Label>
-          <Textarea {...register("notes")} />
+          <Textarea {...register('notes')} />
         </Field.Root>
         <Button size="sm" type="submit" alignSelf="flex-start">
           登録
         </Button>
       </form>
     </Box>
-  );
-};
+  )
+}

@@ -1,14 +1,14 @@
 // import { createUseStyles } from "react-jss"
-import { Table } from "@chakra-ui/react"
-import { Competition } from "../util/types"
+import { Table } from '@chakra-ui/react'
+import { Competition } from '../util/types'
 
 // const useStyles = createUseStyles({})
 
 type ListArgs = {
-  competitions: Competition[],
+  competitions: Competition[]
 }
 
-export const List = ({competitions}: ListArgs) => {
+export const List = ({ competitions }: ListArgs) => {
   // const classes = useStyles()
 
   return (
@@ -39,10 +39,14 @@ export const List = ({competitions}: ListArgs) => {
             <Table.Cell>{competition.ageCategory}</Table.Cell>
             <Table.Cell>{competition.startDate.toDateString()}</Table.Cell>
             <Table.Cell>{competition.finishDate.toDateString()}</Table.Cell>
-            <Table.Cell>{competition.subscriptionDeadlineDate.toDateString()}</Table.Cell>
+            <Table.Cell>
+              {competition.subscriptionDeadlineDate.toDateString()}
+            </Table.Cell>
             <Table.Cell>{competition.url}</Table.Cell>
             <Table.Cell>{competition.notes}</Table.Cell>
-            <Table.Cell>{competition.registrationDate.toDateString()}</Table.Cell>
+            <Table.Cell>
+              {competition.registrationDate.toDateString()}
+            </Table.Cell>
             <Table.Cell>🗑️</Table.Cell>
           </Table.Row>
         ))}
