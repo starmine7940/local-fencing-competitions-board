@@ -1,6 +1,6 @@
 import { Box, Table } from '@chakra-ui/react'
 import { Competition } from '../util/types'
-import { formatDate } from '../util/functions'
+import { formatDateWithoutTime, formatDateWithTime } from '../util/functions'
 import { useMemo, useState } from 'react'
 import {
   useReactTable,
@@ -46,19 +46,19 @@ export const CompetitionsTable = ({ competitions }: CompetitionsTableArgs) => {
       {
         accessorKey: 'startDate',
         header: '大会開始日',
-        cell: (info) => formatDate(info.getValue<Date | null>()),
+        cell: (info) => formatDateWithoutTime(info.getValue<Date | null>()),
         sortingFn: 'datetime',
       },
       {
         accessorKey: 'finishDate',
         header: '大会終了日',
-        cell: (info) => formatDate(info.getValue<Date | null>()),
+        cell: (info) => formatDateWithoutTime(info.getValue<Date | null>()),
         sortingFn: 'datetime',
       },
       {
         accessorKey: 'subscriptionDeadlineDate',
         header: '申込締切日',
-        cell: (info) => formatDate(info.getValue<Date | null>()),
+        cell: (info) => formatDateWithoutTime(info.getValue<Date | null>()),
         sortingFn: 'datetime',
       },
       {
@@ -72,7 +72,7 @@ export const CompetitionsTable = ({ competitions }: CompetitionsTableArgs) => {
       {
         accessorKey: 'registrationDate',
         header: '登録日',
-        cell: (info) => formatDate(info.getValue<Date>()),
+        cell: (info) => formatDateWithTime(info.getValue<Date>()),
         sortingFn: 'datetime',
       },
     ],
