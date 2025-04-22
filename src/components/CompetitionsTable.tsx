@@ -10,12 +10,17 @@ import {
   SortingState,
   getSortedRowModel,
 } from '@tanstack/react-table'
+import { DeleteButtonAndDialog } from './DeleteButtonAndDialog'
 
 type CompetitionsTableArgs = {
   competitions: Competition[]
+  handleDelete: (id: string, deleteCode: string) => Promise<void>
 }
 
-export const CompetitionsTable = ({ competitions }: CompetitionsTableArgs) => {
+export const CompetitionsTable = ({
+  competitions,
+  handleDelete,
+}: CompetitionsTableArgs) => {
   const [sorting, setSorting] = useState<SortingState>([])
 
   const columns = useMemo<ColumnDef<Competition>[]>(
@@ -74,6 +79,17 @@ export const CompetitionsTable = ({ competitions }: CompetitionsTableArgs) => {
         header: '登録日',
         cell: (info) => formatDateWithTime(info.getValue<Date>()),
         sortingFn: 'datetime',
+      },
+      {
+        id: 'delete',
+        header: '削除',
+        cell: (info) => (
+          <DeleteButtonAndDialog
+            selectedCompetitionId={info.row.original.id}
+            selectedCompetitionName={info.row.original.name}
+            handleDelete={handleDelete}
+          />
+        ),
       },
     ],
     []
