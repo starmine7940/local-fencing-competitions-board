@@ -12,7 +12,7 @@ import {
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { Controller } from 'react-hook-form'
-import { addDoc, collection, Firestore } from 'firebase/firestore'
+import { collection, doc, Firestore, setDoc } from 'firebase/firestore'
 import {
   ageCategories,
   CompetitionRegisterForm,
@@ -49,16 +49,25 @@ export const CompetitionsRegisterForm = ({
     ageCategory,
   } = useCompetitionsRegisterForm()
 
-  const createSuccessToast = () => {
+  const createSuccessToast = (deleteCode: string) => {
     toaster.create({
-      title: `登録に成功しました。`,
+      title: (
+        <>
+          大会の登録に成功しました。
+          <br />
+          登録した大会の削除コードは「{deleteCode}」です。大切にお控えください。
+          <br />
+          このトーストは 5 分後に自動的に閉じます。
+        </>
+      ),
       type: 'success',
+      duration: 1000 * 60 * 1,
     })
   }
 
   const createErrorToast = () => {
     toaster.create({
-      title: `登録に失敗しました。`,
+      title: `大会の登録に失敗しました。`,
       type: 'error',
     })
   }
@@ -69,9 +78,25 @@ export const CompetitionsRegisterForm = ({
         ...formData,
         registrationDate: new Date(),
       }
-      await addDoc(collection(db, 'competitions'), competionWithoutId)
+
+      // 削除コードの生成
+      // const deleteCode = Math.floor(Math.random() * 1000000).toString().padStart(6, '0') // 6 桁のランダムな整数を生成
+      const deleteCode = '123456' // 動作確認用
+      const deleteCodeObject = {
+        deleteCode: deleteCode,
+      }
+
+      // ドキュメント ID の生成
+      const newCompetitionDoc = doc(collection(db, 'competitions'))
+      const newDocId = newCompetitionDoc.id
+
+      // 登録
+      await Promise.all([
+        setDoc(doc(db, 'competitions', newDocId), competionWithoutId),
+        setDoc(doc(db, 'deleteCodes', newDocId), deleteCodeObject),
+      ])
       reset()
-      createSuccessToast()
+      createSuccessToast(deleteCode)
     } catch (error) {
       console.error(error)
       createErrorToast()
