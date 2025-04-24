@@ -1,4 +1,5 @@
-export type CompetitionRegisterForm = {
+export type Competition = {
+  id: string
   name: string
   site: string
   eventCategory: string[]
@@ -9,12 +10,11 @@ export type CompetitionRegisterForm = {
   subscriptionDeadlineDate: Date | null
   url: string
   notes: string
+  registrationDate: Date
 }
 
-export type Competition = {
-  id: string
-  registrationDate: Date
-} & CompetitionRegisterForm
+export type CompetitionRegisterForm = Omit<Competition, 'id' | 'registrationDate'>
+
 
 export type CompetitionWithoutId = Omit<Competition, 'id'>
 
