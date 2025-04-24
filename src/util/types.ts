@@ -13,8 +13,10 @@ export type Competition = {
   registrationDate: Date
 }
 
-export type CompetitionRegisterForm = Omit<Competition, 'id' | 'registrationDate'>
-
+export type CompetitionRegisterForm = Omit<
+  Competition,
+  'id' | 'registrationDate'
+>
 
 export type CompetitionWithoutId = Omit<Competition, 'id'>
 
