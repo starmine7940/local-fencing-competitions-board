@@ -104,7 +104,7 @@ export const CompetitionsRegisterForm = ({
   }
 
   return (
-    <Box colorPalette="orange">
+    <Box>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack gap="30px">
           <Field.Root invalid={!!formState.errors.name}>
