@@ -13,6 +13,7 @@ import { CompetitionsTable } from './CompetitionsTable'
 import { Box, Flex } from '@chakra-ui/react'
 import { Caution } from './Caution'
 import { toaster, Toaster } from './ui/toaster'
+import { Information } from './Information'
 
 type CompetitionsViewPageArgs = {
   db: Firestore
@@ -75,6 +76,7 @@ export const CompetitionsViewPage = ({ db }: CompetitionsViewPageArgs) => {
   return (
     <Box padding="10px">
       <Flex direction="column" gap="10px">
+        <Information />
         <Caution />
         <CompetitionsTable
           competitions={competitions}
