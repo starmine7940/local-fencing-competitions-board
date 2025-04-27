@@ -198,7 +198,9 @@ export const CompetitionsRegisterForm = ({
                 />
               )}
             />
-            <Field.ErrorText>{formState.errors.startDate?.message}</Field.ErrorText>
+            <Field.ErrorText>
+              {formState.errors.startDate?.message}
+            </Field.ErrorText>
           </Field.Root>
           <Field.Root invalid={!!formState.errors.finishDate}>
             <Field.Label>終了日 (任意)</Field.Label> {/* TODO: 必須にする */}
@@ -214,7 +216,9 @@ export const CompetitionsRegisterForm = ({
                 />
               )}
             />
-            <Field.ErrorText>{formState.errors.finishDate?.message}</Field.ErrorText>
+            <Field.ErrorText>
+              {formState.errors.finishDate?.message}
+            </Field.ErrorText>
           </Field.Root>
           <Field.Root invalid={!!formState.errors.subscriptionDeadlineDate}>
             <Field.Label>申込締切日 (任意)</Field.Label>{' '}
@@ -231,7 +235,9 @@ export const CompetitionsRegisterForm = ({
                 />
               )}
             />
-            <Field.ErrorText>{formState.errors.subscriptionDeadlineDate?.message}</Field.ErrorText>
+            <Field.ErrorText>
+              {formState.errors.subscriptionDeadlineDate?.message}
+            </Field.ErrorText>
           </Field.Root>
           <Field.Root invalid={!!formState.errors.url}>
             <Field.Label>大会ページURL (任意)</Field.Label>
