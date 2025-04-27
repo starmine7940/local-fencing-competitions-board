@@ -8,8 +8,14 @@ const genderCategoryEnum = z.enum(genderCategories)
 const ageCategoryEnum = z.enum(ageCategories)
 
 export const competitionSchema = z.object({
-  name: z.string().min(1, '大会名は必須です'),
-  site: z.string().min(1, '会場は必須です'),
+  name: z
+    .string()
+    .min(1, '少なくとも1つ選んでください')
+    .max(100, '100文字以内で入力してください'),
+  site: z
+    .string()
+    .min(1, '会場は必須です')
+    .max(100, '100文字以内で入力してください'),
   eventCategory: z
     .array(eventCategoryEnum)
     .min(1, '少なくとも1つ選んでください'),
@@ -34,6 +40,7 @@ export const competitionSchema = z.object({
   // }),
   url: z
     .string()
+    .max(300, '300文字以内で入力してください')
     .refine(
       (val) => val === '' || z.string().url().safeParse(val).success,
       '有効なURLを入力してください'
