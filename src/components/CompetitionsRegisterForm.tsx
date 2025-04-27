@@ -110,16 +110,12 @@ export const CompetitionsRegisterForm = ({
           <Field.Root invalid={!!formState.errors.name}>
             <Field.Label>大会名 (必須)</Field.Label>
             <Input {...register('name')} />
-            {!!formState.errors.name && (
-              <Field.ErrorText>大会名は必須です</Field.ErrorText> // TODO: 固定のエラー文言を使う
-            )}
+            <Field.ErrorText>{formState.errors.name?.message}</Field.ErrorText>
           </Field.Root>
           <Field.Root invalid={!!formState.errors.site}>
             <Field.Label>会場 (必須)</Field.Label>
             <Input {...register('site')} />
-            {!!formState.errors.site && (
-              <Field.ErrorText>会場は必須です</Field.ErrorText> // TODO: 固定のエラー文言を使う
-            )}
+            <Field.ErrorText>{formState.errors.site?.message}</Field.ErrorText>
           </Field.Root>
 
           <Fieldset.Root invalid={!!formState.errors.eventCategory}>
@@ -139,11 +135,9 @@ export const CompetitionsRegisterForm = ({
                 ))}
               </Fieldset.Content>
             </CheckboxGroup>
-            {!!formState.errors.eventCategory && (
-              <Fieldset.ErrorText>
-                少なくとも1つ選んでください
-              </Fieldset.ErrorText> // TODO: 固定のエラー文言を使う
-            )}
+            <Fieldset.ErrorText>
+              {formState.errors.eventCategory?.message}
+            </Fieldset.ErrorText>
           </Fieldset.Root>
 
           <Fieldset.Root invalid={!!formState.errors.genderCategory}>
@@ -163,11 +157,9 @@ export const CompetitionsRegisterForm = ({
                 ))}
               </Fieldset.Content>
             </CheckboxGroup>
-            {!!formState.errors.genderCategory && (
-              <Fieldset.ErrorText>
-                少なくとも1つ選んでください
-              </Fieldset.ErrorText> // TODO: 固定のエラー文言を使う
-            )}
+            <Fieldset.ErrorText>
+              {formState.errors.genderCategory?.message}
+            </Fieldset.ErrorText>
           </Fieldset.Root>
 
           <Fieldset.Root invalid={!!formState.errors.ageCategory}>
@@ -187,11 +179,9 @@ export const CompetitionsRegisterForm = ({
                 ))}
               </Fieldset.Content>
             </CheckboxGroup>
-            {!!formState.errors.ageCategory && (
-              <Fieldset.ErrorText>
-                少なくとも1つ選んでください
-              </Fieldset.ErrorText> // TODO: 固定のエラー文言を使う
-            )}
+            <Fieldset.ErrorText>
+              {formState.errors.ageCategory?.message}
+            </Fieldset.ErrorText>
           </Fieldset.Root>
 
           <Field.Root invalid={!!formState.errors.startDate}>
@@ -208,9 +198,7 @@ export const CompetitionsRegisterForm = ({
                 />
               )}
             />
-            {!!formState.errors.startDate && (
-              <Field.ErrorText>開始日は必須です</Field.ErrorText> // TODO: 固定のエラー文言を使う
-            )}
+            <Field.ErrorText>{formState.errors.startDate?.message}</Field.ErrorText>
           </Field.Root>
           <Field.Root invalid={!!formState.errors.finishDate}>
             <Field.Label>終了日 (任意)</Field.Label> {/* TODO: 必須にする */}
@@ -226,9 +214,7 @@ export const CompetitionsRegisterForm = ({
                 />
               )}
             />
-            {!!formState.errors.finishDate && (
-              <Field.ErrorText>終了日は必須です</Field.ErrorText> // TODO: 固定のエラー文言を使う
-            )}
+            <Field.ErrorText>{formState.errors.finishDate?.message}</Field.ErrorText>
           </Field.Root>
           <Field.Root invalid={!!formState.errors.subscriptionDeadlineDate}>
             <Field.Label>申込締切日 (任意)</Field.Label>{' '}
@@ -245,23 +231,17 @@ export const CompetitionsRegisterForm = ({
                 />
               )}
             />
-            {!!formState.errors.subscriptionDeadlineDate && (
-              <Field.ErrorText>申込締切日は必須です</Field.ErrorText> // TODO: 固定のエラー文言を使う
-            )}
+            <Field.ErrorText>{formState.errors.subscriptionDeadlineDate?.message}</Field.ErrorText>
           </Field.Root>
           <Field.Root invalid={!!formState.errors.url}>
             <Field.Label>大会ページURL (任意)</Field.Label>
             <Input {...register('url')} />
-            {!!formState.errors.url && (
-              <Field.ErrorText>有効なURLを入力してください</Field.ErrorText> // TODO: 固定のエラー文言を使う
-            )}
+            <Field.ErrorText>{formState.errors.url?.message}</Field.ErrorText>
           </Field.Root>
           <Field.Root invalid={!!formState.errors.notes}>
             <Field.Label>備考 (任意)</Field.Label>
             <Textarea {...register('notes')} />
-            {!!formState.errors.notes && (
-              <Field.ErrorText>300文字以内で入力してください</Field.ErrorText> // TODO: 固定のエラー文言を使う
-            )}
+            <Field.ErrorText>{formState.errors.notes?.message}</Field.ErrorText>
           </Field.Root>
           <Button
             size="sm"
