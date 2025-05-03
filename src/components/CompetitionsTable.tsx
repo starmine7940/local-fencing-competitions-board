@@ -11,6 +11,7 @@ import {
   getSortedRowModel,
 } from '@tanstack/react-table'
 import { DeleteButtonAndDialog } from './DeleteButtonAndDialog'
+import { DetailsToggleCell } from './DetailsToggleCell'
 
 type CompetitionsTableArgs = {
   competitions: Competition[]
@@ -28,10 +29,12 @@ export const CompetitionsTable = ({
       {
         accessorKey: 'name',
         header: '大会名',
+        cell: (info) => <DetailsToggleCell text={info.getValue<string>()} />,
       },
       {
         accessorKey: 'site',
         header: '会場',
+        cell: (info) => <DetailsToggleCell text={info.getValue<string>()} />,
       },
       {
         accessorKey: 'eventCategory',
@@ -69,10 +72,12 @@ export const CompetitionsTable = ({
       {
         accessorKey: 'url',
         header: 'URL',
+        cell: (info) => <DetailsToggleCell text={info.getValue<string>()} />,
       },
       {
         accessorKey: 'notes',
         header: '備考',
+        cell: (info) => <DetailsToggleCell text={info.getValue<string>()} />,
       },
       {
         accessorKey: 'registrationDate',
