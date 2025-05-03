@@ -1,4 +1,4 @@
-import { Box, Table } from '@chakra-ui/react'
+import { Badge, Box, Table } from '@chakra-ui/react'
 import { Competition } from '../util/types'
 import { formatDateWithoutTime, formatDateWithTime } from '../util/functions'
 import { useMemo, useState } from 'react'
@@ -39,17 +39,41 @@ export const CompetitionsTable = ({
       {
         accessorKey: 'eventCategory',
         header: '種目',
-        cell: (info) => info.getValue<string[]>().join(', '),
+        cell: (info) => {
+          return (
+            <Box display="flex" flexWrap="wrap" gap="5px">
+              {info.getValue<string[]>().map((item) => (
+                <Badge key={item}>{item}</Badge>
+              ))}
+            </Box>
+          )
+        },
       },
       {
         accessorKey: 'genderCategory',
         header: '性別',
-        cell: (info) => info.getValue<string[]>().join(', '),
+        cell: (info) => {
+          return (
+            <Box display="flex" flexWrap="wrap" gap="5px">
+              {info.getValue<string[]>().map((item) => (
+                <Badge key={item}>{item}</Badge>
+              ))}
+            </Box>
+          )
+        },
       },
       {
         accessorKey: 'ageCategory',
         header: '年齢区分',
-        cell: (info) => info.getValue<string[]>().join(', '),
+        cell: (info) => {
+          return (
+            <Box display="flex" flexWrap="wrap" gap="5px">
+              {info.getValue<string[]>().map((item) => (
+                <Badge key={item}>{item}</Badge>
+              ))}
+            </Box>
+          )
+        },
       },
       {
         accessorKey: 'startDate',
