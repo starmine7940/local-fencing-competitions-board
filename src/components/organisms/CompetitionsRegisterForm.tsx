@@ -215,7 +215,7 @@ export const CompetitionsRegisterForm = ({
           </Fieldset.Root>
 
           <Field.Root invalid={!!formState.errors.startDate}>
-            <Field.Label>開始日 (必須)</Field.Label>
+            <Field.Label>開始日 (変更必須)</Field.Label>
             <Controller
               name="startDate"
               control={control}
@@ -234,7 +234,7 @@ export const CompetitionsRegisterForm = ({
             </Field.ErrorText>
           </Field.Root>
           <Field.Root invalid={!!formState.errors.finishDate}>
-            <Field.Label>終了日 (必須)</Field.Label>
+            <Field.Label>終了日 (変更必須)</Field.Label>
             <Controller
               name="finishDate"
               control={control}
@@ -253,7 +253,7 @@ export const CompetitionsRegisterForm = ({
             </Field.ErrorText>
           </Field.Root>
           <Field.Root invalid={!!formState.errors.subscriptionDeadlineDate}>
-            <Field.Label>申込締切日 (必須)</Field.Label>
+            <Field.Label>申込締切日 (変更必須)</Field.Label>
             <Controller
               name="subscriptionDeadlineDate"
               control={control}
