@@ -9,6 +9,7 @@ import {
   Box,
 } from '@chakra-ui/react'
 import { useState } from 'react'
+import { TbTrash } from 'react-icons/tb'
 
 type DeleteButtonAndDialogArgs = {
   selectedCompetitionId: string
@@ -32,8 +33,8 @@ export const DeleteButtonAndDialog = ({
     <Box>
       <Dialog.Root>
         <Dialog.Trigger asChild>
-          <Button variant="outline" size="sm">
-            🗑️
+          <Button variant="outline" size="xs">
+            <TbTrash />
           </Button>
         </Dialog.Trigger>
         <Portal>
