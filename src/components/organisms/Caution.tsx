@@ -14,9 +14,7 @@ export const Caution = () => {
             <List.Item>
               本サイトにより発生したトラブルについて、開発者は一切の責任を負いません。
             </List.Item>
-            <List.Item>
-              不適切な大会情報は削除することがあります。
-            </List.Item>
+            <List.Item>不適切な大会情報は削除することがあります。</List.Item>
           </List.Root>
         </Alert.Description>
       </Alert.Content>

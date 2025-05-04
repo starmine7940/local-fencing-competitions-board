@@ -1,5 +1,10 @@
 import { Box, Flex, Table } from '@chakra-ui/react'
-import { ageCategories, Competition, eventCategories, genderCategories } from '../../../util/types'
+import {
+  ageCategories,
+  Competition,
+  eventCategories,
+  genderCategories,
+} from '../../../util/types'
 import {
   formatDateWithoutTime,
   formatDateWithTime,
