@@ -20,7 +20,7 @@ export type CompetitionRegisterForm = Omit<
 
 export type CompetitionWithoutId = Omit<Competition, 'id'>
 
-export const eventCategories = ['エペ', 'フルーレ', 'サーブル'] as const
+export const eventCategories = ['エペ', 'フルーレ', 'サーブル', 'シッティング'] as const
 export const genderCategories = ['女性', '男性'] as const
 export const ageCategories = [
   '未就学児',
