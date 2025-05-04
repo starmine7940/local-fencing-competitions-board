@@ -205,6 +205,7 @@ export const CompetitionsRegisterForm = ({
                   onChange={field.onChange}
                   dateFormat="yyyy/MM/dd"
                   placeholderText="日付を選択"
+                  popperPlacement="bottom-end"
                 />
               )}
             />
@@ -223,6 +224,7 @@ export const CompetitionsRegisterForm = ({
                   onChange={field.onChange}
                   dateFormat="yyyy/MM/dd"
                   placeholderText="日付を選択"
+                  popperPlacement="bottom-end"
                 />
               )}
             />
@@ -242,6 +244,7 @@ export const CompetitionsRegisterForm = ({
                   onChange={field.onChange}
                   dateFormat="yyyy/MM/dd"
                   placeholderText="日付を選択"
+                  popperPlacement="bottom-end"
                 />
               )}
             />
