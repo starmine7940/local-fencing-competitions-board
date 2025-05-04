@@ -1,9 +1,9 @@
-import { Box, Flex } from "@chakra-ui/react"
-import { Firestore } from "firebase/firestore"
-import { Caution } from "../organisms/Caution"
-import { CompetitionsRegisterForm } from "../organisms/CompetitionsRegisterForm"
-import { Information } from "../organisms/Information"
-import { RegisterCaution } from "../organisms/RegisterCaution"
+import { Box, Flex } from '@chakra-ui/react'
+import { Firestore } from 'firebase/firestore'
+import { Caution } from '../organisms/Caution'
+import { CompetitionsRegisterForm } from '../organisms/CompetitionsRegisterForm'
+import { Information } from '../organisms/Information'
+import { RegisterCaution } from '../organisms/RegisterCaution'
 
 type CompetitionsRegistrationArgs = {
   db: Firestore
