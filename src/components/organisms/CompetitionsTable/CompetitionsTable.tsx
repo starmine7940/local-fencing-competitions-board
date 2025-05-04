@@ -1,6 +1,9 @@
 import { Box, Table } from '@chakra-ui/react'
-import { Competition } from '../util/types'
-import { formatDateWithoutTime, formatDateWithTime } from '../util/functions'
+import { Competition } from '../../../util/types'
+import {
+  formatDateWithoutTime,
+  formatDateWithTime,
+} from '../../../util/functions'
 import { useMemo, useState } from 'react'
 import {
   useReactTable,
@@ -83,7 +86,7 @@ export const CompetitionsTable = ({
         cell: (info) => {
           const url = info.getValue<string>()
           return url && <UrlCell url={url} />
-      },
+        },
       },
       {
         accessorKey: 'notes',

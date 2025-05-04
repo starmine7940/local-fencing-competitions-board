@@ -19,9 +19,9 @@ import {
   CompetitionWithoutId,
   eventCategories,
   genderCategories,
-} from '../util/types'
-import { useCompetitionsRegisterForm } from '../hooks/useCompetitionsRegisterForm'
-import { Toaster, toaster } from './ui/toaster'
+} from '../../util/types'
+import { useCompetitionsRegisterForm } from '../../hooks/useCompetitionsRegisterForm'
+import { Toaster, toaster } from '../ui/toaster'
 
 type CompetitionsRegisterFormArgs = {
   db: Firestore

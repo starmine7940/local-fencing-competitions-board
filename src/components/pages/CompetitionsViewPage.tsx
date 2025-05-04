@@ -1,19 +1,11 @@
-import {
-  collection,
-  deleteDoc,
-  doc,
-  documentId,
-  Firestore,
-  getDocs,
-  query,
-  where,
-} from 'firebase/firestore'
-import { useGetCompetitions } from '../hooks/useGetCompetions'
-import { CompetitionsTable } from './CompetitionsTable'
-import { Box, Flex } from '@chakra-ui/react'
-import { Caution } from './Caution'
-import { toaster, Toaster } from './ui/toaster'
-import { Information } from './Information'
+import { Box, Flex } from "@chakra-ui/react"
+import { Firestore, collection, query, where, documentId, getDocs, deleteDoc, doc } from "firebase/firestore"
+import { useGetCompetitions } from "../../hooks/useGetCompetions"
+import { Caution } from "../organisms/Caution"
+import { CompetitionsTable } from "../organisms/CompetitionsTable/CompetitionsTable"
+import { Information } from "../organisms/Information"
+import { toaster, Toaster } from "../ui/toaster"
+
 
 type CompetitionsViewPageArgs = {
   db: Firestore
