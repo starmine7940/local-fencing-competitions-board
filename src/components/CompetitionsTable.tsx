@@ -144,6 +144,7 @@ export const CompetitionsTable = ({
                 return (
                   <Table.ColumnHeader
                     key={header.id}
+                    minW='200px'
                     onClick={
                       isSortable
                         ? header.column.getToggleSortingHandler()
