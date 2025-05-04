@@ -1,4 +1,4 @@
-import { Box, Table } from '@chakra-ui/react'
+import { Box, Flex, Table } from '@chakra-ui/react'
 import { Competition } from '../../../util/types'
 import {
   formatDateWithoutTime,
@@ -17,6 +17,11 @@ import { DeleteButtonAndDialog } from './DeleteButtonAndDialog'
 import { DetailsToggleCell } from './DetailsToggleCell'
 import { BadgesCell } from './BadgesCell'
 import { UrlCell } from './UrlCell'
+import {
+  TbCaretUpDownFilled,
+  TbTriangleFilled,
+  TbTriangleInvertedFilled,
+} from 'react-icons/tb'
 
 type CompetitionsTableArgs = {
   competitions: Competition[]
@@ -34,26 +39,31 @@ export const CompetitionsTable = ({
       {
         accessorKey: 'name',
         header: '大会名',
+        enableSorting: false,
         cell: (info) => <DetailsToggleCell text={info.getValue<string>()} />,
       },
       {
         accessorKey: 'site',
         header: '会場',
+        enableSorting: false,
         cell: (info) => <DetailsToggleCell text={info.getValue<string>()} />,
       },
       {
         accessorKey: 'eventCategory',
         header: '種目',
+        enableSorting: false,
         cell: (info) => <BadgesCell items={info.getValue<string[]>()} />,
       },
       {
         accessorKey: 'genderCategory',
         header: '性別',
+        enableSorting: false,
         cell: (info) => <BadgesCell items={info.getValue<string[]>()} />,
       },
       {
         accessorKey: 'ageCategory',
         header: '年齢区分',
+        enableSorting: false,
         cell: (info) => <BadgesCell items={info.getValue<string[]>()} />,
       },
       {
@@ -83,6 +93,7 @@ export const CompetitionsTable = ({
       {
         accessorKey: 'url',
         header: 'URL',
+        enableSorting: false,
         cell: (info) => {
           const url = info.getValue<string>()
           return url && <UrlCell url={url} />
@@ -91,6 +102,7 @@ export const CompetitionsTable = ({
       {
         accessorKey: 'notes',
         header: '備考',
+        enableSorting: false,
         cell: (info) => <DetailsToggleCell text={info.getValue<string>()} />,
       },
       {
@@ -102,6 +114,7 @@ export const CompetitionsTable = ({
       {
         id: 'delete',
         header: '削除',
+        enableSorting: false,
         cell: (info) => (
           <DeleteButtonAndDialog
             selectedCompetitionId={info.row.original.id}
@@ -131,25 +144,31 @@ export const CompetitionsTable = ({
             <Table.Row bg="bg.subtle" id={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 const isSortable = header.column.getCanSort()
+                const sortState = header.column.getIsSorted()
                 return (
                   <Table.ColumnHeader
                     key={header.id}
                     minW="200px"
-                    textAlign="center"
                     onClick={
                       isSortable
                         ? header.column.getToggleSortingHandler()
                         : undefined
                     }
                   >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-                    {{
-                      asc: ' 🔼',
-                      desc: ' 🔽',
-                    }[header.column.getIsSorted() as string] ?? ''}
+                    <Flex justify="center" align="center" gap="1px">
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                      {isSortable &&
+                        (sortState === 'asc' ? (
+                          <TbTriangleFilled size={10} />
+                        ) : sortState === 'desc' ? (
+                          <TbTriangleInvertedFilled size={10} />
+                        ) : (
+                          <TbCaretUpDownFilled size={16} />
+                        ))}
+                    </Flex>
                   </Table.ColumnHeader>
                 )
               })}
