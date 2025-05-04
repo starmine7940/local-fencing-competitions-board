@@ -131,7 +131,13 @@ export const CompetitionsRegisterForm = ({
             <CheckboxGroup
               invalid={!!formState.errors.eventCategory}
               value={eventCategory.field.value}
-              onValueChange={eventCategory.field.onChange}
+              onValueChange={(values) => {
+                // 表示順に並び替えてからセット
+                const sorted = eventCategories.filter((item) =>
+                  values.includes(item)
+                )
+                eventCategory.field.onChange(sorted)
+              }}
             >
               <Fieldset.Content>
                 {eventCategoryItems.map((item) => (
@@ -155,7 +161,13 @@ export const CompetitionsRegisterForm = ({
             <CheckboxGroup
               invalid={!!formState.errors.genderCategory}
               value={genderCategory.field.value}
-              onValueChange={genderCategory.field.onChange}
+              onValueChange={(values) => {
+                // 表示順に並び替えてからセット
+                const sorted = genderCategories.filter((item) =>
+                  values.includes(item)
+                )
+                genderCategory.field.onChange(sorted)
+              }}
             >
               <Fieldset.Content>
                 {genderCategoryItems.map((item) => (
@@ -179,7 +191,13 @@ export const CompetitionsRegisterForm = ({
             <CheckboxGroup
               invalid={!!formState.errors.ageCategory}
               value={ageCategory.field.value}
-              onValueChange={ageCategory.field.onChange}
+              onValueChange={(values) => {
+                // 表示順に並び替えてからセット
+                const sorted = ageCategories.filter((item) =>
+                  values.includes(item)
+                )
+                ageCategory.field.onChange(sorted)
+              }}
             >
               <Fieldset.Content>
                 {ageCategoryItems.map((item) => (

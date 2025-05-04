@@ -1,5 +1,5 @@
 import { Box, Flex, Table } from '@chakra-ui/react'
-import { Competition } from '../../../util/types'
+import { ageCategories, Competition, eventCategories, genderCategories } from '../../../util/types'
 import {
   formatDateWithoutTime,
   formatDateWithTime,
@@ -52,19 +52,31 @@ export const CompetitionsTable = ({
         accessorKey: 'eventCategory',
         header: '種目',
         enableSorting: false,
-        cell: (info) => <BadgesCell items={info.getValue<string[]>()} />,
+        cell: (info) => {
+          const value = info.getValue<string[]>()
+          const sorted = eventCategories.filter((item) => value.includes(item))
+          return <BadgesCell items={sorted} />
+        },
       },
       {
         accessorKey: 'genderCategory',
         header: '性別',
         enableSorting: false,
-        cell: (info) => <BadgesCell items={info.getValue<string[]>()} />,
+        cell: (info) => {
+          const value = info.getValue<string[]>()
+          const sorted = genderCategories.filter((item) => value.includes(item))
+          return <BadgesCell items={sorted} />
+        },
       },
       {
         accessorKey: 'ageCategory',
         header: '年齢区分',
         enableSorting: false,
-        cell: (info) => <BadgesCell items={info.getValue<string[]>()} />,
+        cell: (info) => {
+          const value = info.getValue<string[]>()
+          const sorted = ageCategories.filter((item) => value.includes(item))
+          return <BadgesCell items={sorted} />
+        },
       },
       {
         accessorKey: 'startDate',
