@@ -10,19 +10,19 @@ const ageCategoryEnum = z.enum(ageCategories)
 export const competitionSchema = z.object({
   name: z
     .string()
-    .min(1, '少なくとも1つ選んでください')
-    .max(100, '100文字以内で入力してください'),
+    .min(1, '少なくとも 1 つ選んでください')
+    .max(100, '100 文字以内で入力してください'),
   site: z
     .string()
     .min(1, '会場は必須です')
-    .max(100, '100文字以内で入力してください'),
+    .max(100, '100 文字以内で入力してください'),
   eventCategory: z
     .array(eventCategoryEnum)
-    .min(1, '少なくとも1つ選んでください'),
+    .min(1, '少なくとも 1 つ選んでください'),
   genderCategory: z
     .array(genderCategoryEnum)
-    .min(1, '少なくとも1つ選んでください'),
-  ageCategory: z.array(ageCategoryEnum).min(1, '少なくとも1つ選んでください'),
+    .min(1, '少なくとも 1 つ選んでください'),
+  ageCategory: z.array(ageCategoryEnum).min(1, '少なくとも 1 つ選んでください'),
   startDate: z.date().nullable(),
   // TODO: 必須入力にする
   // .refine((val): val is Date => val instanceof Date, {
@@ -40,12 +40,12 @@ export const competitionSchema = z.object({
   // }),
   url: z
     .string()
-    .max(300, '300文字以内で入力してください')
+    .max(300, '300 文字以内で入力してください')
     .refine(
       (val) => val === '' || z.string().url().safeParse(val).success,
-      '有効なURLを入力してください'
+      '有効な URL を入力してください'
     ),
-  notes: z.string().max(300, `300文字以内で入力してください`),
+  notes: z.string().max(300, `300 文字以内で入力してください`),
 })
 
 export type CompetitionForm = z.infer<typeof competitionSchema>
