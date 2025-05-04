@@ -119,7 +119,7 @@ export const CompetitionsTable = ({
       },
       {
         accessorKey: 'registrationDate',
-        header: '登録日',
+        header: '大会情報の登録日',
         cell: (info) => formatDateWithTime(info.getValue<Date>()),
         sortingFn: 'datetime',
       },

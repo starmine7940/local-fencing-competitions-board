@@ -186,7 +186,7 @@ export const CompetitionsRegisterForm = ({
 
           <Fieldset.Root invalid={!!formState.errors.ageCategory}>
             <Fieldset.Legend>
-              年齢 (必須、該当する項目をすべて選択)
+              年齢区分 (必須、該当する項目をすべて選択)
             </Fieldset.Legend>
             <CheckboxGroup
               invalid={!!formState.errors.ageCategory}
@@ -215,7 +215,7 @@ export const CompetitionsRegisterForm = ({
           </Fieldset.Root>
 
           <Field.Root invalid={!!formState.errors.startDate}>
-            <Field.Label>開始日 (変更必須)</Field.Label>
+            <Field.Label>大会開始日 (変更必須)</Field.Label>
             <Controller
               name="startDate"
               control={control}
@@ -234,7 +234,7 @@ export const CompetitionsRegisterForm = ({
             </Field.ErrorText>
           </Field.Root>
           <Field.Root invalid={!!formState.errors.finishDate}>
-            <Field.Label>終了日 (変更必須)</Field.Label>
+            <Field.Label>大会終了日 (変更必須)</Field.Label>
             <Controller
               name="finishDate"
               control={control}
