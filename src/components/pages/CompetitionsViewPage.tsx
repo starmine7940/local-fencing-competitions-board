@@ -20,7 +20,7 @@ type CompetitionsViewPageArgs = {
 }
 
 export const CompetitionsViewPage = ({ db }: CompetitionsViewPageArgs) => {
-  const { competitions } = useGetCompetitions({ db })
+  const { competitions, fetchCompetitions } = useGetCompetitions({ db })
 
   const createSuccessToast = () => {
     toaster.create({
@@ -67,6 +67,7 @@ export const CompetitionsViewPage = ({ db }: CompetitionsViewPageArgs) => {
       await deleteDoc(doc(db, 'deleteCodes', id))
 
       createSuccessToast()
+      fetchCompetitions()
     } catch (error) {
       console.error('handleDelete error: ', error)
       createDeleteErrorToast()

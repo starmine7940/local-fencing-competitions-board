@@ -8,6 +8,7 @@ type UseGetCompetitionsArgs = {
 
 type UseGetCompetitions = {
   competitions: Competition[]
+  fetchCompetitions: () => Promise<void>
 }
 
 export const useGetCompetitions = ({
@@ -15,7 +16,7 @@ export const useGetCompetitions = ({
 }: UseGetCompetitionsArgs): UseGetCompetitions => {
   const [competitions, setCompetitions] = useState<Competition[]>([])
 
-  const fetchCompetitions = async (db: Firestore) => {
+  const fetchCompetitions = async () => {
     try {
       const querySnapshot = await getDocs(collection(db, 'competitions'))
       const data = querySnapshot.docs.map((doc) => {
@@ -42,8 +43,8 @@ export const useGetCompetitions = ({
   }
 
   useEffect(() => {
-    fetchCompetitions(db)
+    fetchCompetitions()
   }, [db])
 
-  return { competitions }
+  return { competitions, fetchCompetitions }
 }
