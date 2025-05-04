@@ -173,7 +173,9 @@ export const CompetitionsRegisterForm = ({
           </Fieldset.Root>
 
           <Fieldset.Root invalid={!!formState.errors.ageCategory}>
-            <Fieldset.Legend>年齢 (必須、該当する項目をすべて選択)</Fieldset.Legend>
+            <Fieldset.Legend>
+              年齢 (必須、該当する項目をすべて選択)
+            </Fieldset.Legend>
             <CheckboxGroup
               invalid={!!formState.errors.ageCategory}
               value={ageCategory.field.value}

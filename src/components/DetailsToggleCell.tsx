@@ -4,7 +4,7 @@ type DetailsToggleCellArgs = {
   text: string
 }
 
-export const DetailsToggleCell = ({text}: DetailsToggleCellArgs) => {
+export const DetailsToggleCell = ({ text }: DetailsToggleCellArgs) => {
   const isLong = text.length > 100
   const preview = isLong ? text.slice(0, 100) + '...' : text
 
