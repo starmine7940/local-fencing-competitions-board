@@ -153,7 +153,7 @@ export const CompetitionsTable = ({
       <Table.Root showColumnBorder>
         <Table.Header>
           {table.getHeaderGroups().map((headerGroup) => (
-            <Table.Row bg="bg.subtle" id={headerGroup.id}>
+            <Table.Row bg="bg.subtle" id={headerGroup.id} key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 const isSortable = header.column.getCanSort()
                 const sortState = header.column.getIsSorted()
@@ -189,7 +189,7 @@ export const CompetitionsTable = ({
         </Table.Header>
         <Table.Body>
           {table.getRowModel().rows.map((row) => (
-            <Table.Row id={row.id}>
+            <Table.Row id={row.id} key={row.id}>
               {row.getVisibleCells().map((cell) => (
                 <Table.Cell key={cell.id} textAlign="center">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
