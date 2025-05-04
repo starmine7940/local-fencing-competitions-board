@@ -13,6 +13,7 @@ import {
 import { DeleteButtonAndDialog } from './DeleteButtonAndDialog'
 import { DetailsToggleCell } from './DetailsToggleCell'
 import { BadgesCell } from './BadgesCell'
+import { UrlCell } from './UrlCell'
 
 type CompetitionsTableArgs = {
   competitions: Competition[]
@@ -79,7 +80,10 @@ export const CompetitionsTable = ({
       {
         accessorKey: 'url',
         header: 'URL',
-        cell: (info) => <DetailsToggleCell text={info.getValue<string>()} />,
+        cell: (info) => {
+          const url = info.getValue<string>()
+          return url && <UrlCell url={url} />
+      },
       },
       {
         accessorKey: 'notes',
