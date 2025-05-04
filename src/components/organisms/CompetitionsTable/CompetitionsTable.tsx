@@ -37,7 +37,9 @@ export const CompetitionsTable = ({
   competitions,
   handleDelete,
 }: CompetitionsTableArgs) => {
-  const [sorting, setSorting] = useState<SortingState>([])
+  const [sorting, setSorting] = useState<SortingState>([
+    { id: 'startDate', desc: false },
+  ])
 
   const columns = useMemo<ColumnDef<Competition>[]>(
     () => [
