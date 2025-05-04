@@ -52,9 +52,7 @@ export const CompetitionsViewPage = ({ db }: CompetitionsViewPageArgs) => {
         where(documentId(), '==', id),
         where('deleteCode', '==', deleteCode)
       )
-      console.log(getDeleteCodeQuery)
       const deleteCodeSnap = await getDocs(getDeleteCodeQuery)
-      console.log(deleteCodeSnap)
       if (deleteCodeSnap.empty) {
         createWrongDeleteCodeErrorToast()
         return
