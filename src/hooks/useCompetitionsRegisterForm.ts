@@ -12,7 +12,7 @@ const defaultDate = new Date(2025, 0, 1)
 export const competitionSchema = z.object({
   name: z
     .string()
-    .min(1, '少なくとも 1 つ選んでください')
+    .min(1, '大会名は必須です')
     .max(100, '100 文字以内で入力してください'),
   site: z
     .string()
