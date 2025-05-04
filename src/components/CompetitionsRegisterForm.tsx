@@ -109,17 +109,25 @@ export const CompetitionsRegisterForm = ({
         <Stack gap="30px">
           <Field.Root invalid={!!formState.errors.name}>
             <Field.Label>大会名 (必須)</Field.Label>
-            <Input {...register('name')} />
+            <Input
+              {...register('name')}
+              placeholder="100 文字まで入力できます"
+            />
             <Field.ErrorText>{formState.errors.name?.message}</Field.ErrorText>
           </Field.Root>
           <Field.Root invalid={!!formState.errors.site}>
             <Field.Label>会場 (必須)</Field.Label>
-            <Input {...register('site')} />
+            <Input
+              {...register('site')}
+              placeholder="100 文字まで入力できます"
+            />
             <Field.ErrorText>{formState.errors.site?.message}</Field.ErrorText>
           </Field.Root>
 
           <Fieldset.Root invalid={!!formState.errors.eventCategory}>
-            <Fieldset.Legend>種目 (必須)</Fieldset.Legend>
+            <Fieldset.Legend>
+              種目 (必須、該当する項目をすべて選択)
+            </Fieldset.Legend>
             <CheckboxGroup
               invalid={!!formState.errors.eventCategory}
               value={eventCategory.field.value}
@@ -141,7 +149,9 @@ export const CompetitionsRegisterForm = ({
           </Fieldset.Root>
 
           <Fieldset.Root invalid={!!formState.errors.genderCategory}>
-            <Fieldset.Legend>性別 (必須)</Fieldset.Legend>
+            <Fieldset.Legend>
+              性別 (必須、該当する項目をすべて選択)
+            </Fieldset.Legend>
             <CheckboxGroup
               invalid={!!formState.errors.genderCategory}
               value={genderCategory.field.value}
@@ -163,7 +173,7 @@ export const CompetitionsRegisterForm = ({
           </Fieldset.Root>
 
           <Fieldset.Root invalid={!!formState.errors.ageCategory}>
-            <Fieldset.Legend>年齢 (必須)</Fieldset.Legend>
+            <Fieldset.Legend>年齢 (必須、該当する項目をすべて選択)</Fieldset.Legend>
             <CheckboxGroup
               invalid={!!formState.errors.ageCategory}
               value={ageCategory.field.value}
@@ -241,12 +251,18 @@ export const CompetitionsRegisterForm = ({
           </Field.Root>
           <Field.Root invalid={!!formState.errors.url}>
             <Field.Label>大会ページURL (任意)</Field.Label>
-            <Input {...register('url')} />
+            <Input
+              {...register('url')}
+              placeholder="300 文字まで入力できます"
+            />
             <Field.ErrorText>{formState.errors.url?.message}</Field.ErrorText>
           </Field.Root>
           <Field.Root invalid={!!formState.errors.notes}>
             <Field.Label>備考 (任意)</Field.Label>
-            <Textarea {...register('notes')} />
+            <Textarea
+              {...register('notes')}
+              placeholder="300 文字まで入力できます"
+            />
             <Field.ErrorText>{formState.errors.notes?.message}</Field.ErrorText>
           </Field.Root>
           <Button
