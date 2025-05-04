@@ -5,9 +5,9 @@ export type Competition = {
   eventCategory: string[]
   genderCategory: string[]
   ageCategory: string[]
-  startDate: Date | null
-  finishDate: Date | null
-  subscriptionDeadlineDate: Date | null
+  startDate: Date
+  finishDate: Date
+  subscriptionDeadlineDate: Date
   url: string
   notes: string
   registrationDate: Date
