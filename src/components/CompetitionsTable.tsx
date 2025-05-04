@@ -1,4 +1,4 @@
-import { Badge, Box, Table } from '@chakra-ui/react'
+import { Box, Table } from '@chakra-ui/react'
 import { Competition } from '../util/types'
 import { formatDateWithoutTime, formatDateWithTime } from '../util/functions'
 import { useMemo, useState } from 'react'
@@ -12,6 +12,7 @@ import {
 } from '@tanstack/react-table'
 import { DeleteButtonAndDialog } from './DeleteButtonAndDialog'
 import { DetailsToggleCell } from './DetailsToggleCell'
+import { BadgesCell } from './BadgesCell'
 
 type CompetitionsTableArgs = {
   competitions: Competition[]
@@ -39,59 +40,17 @@ export const CompetitionsTable = ({
       {
         accessorKey: 'eventCategory',
         header: '種目',
-        cell: (info) => {
-          return (
-            <Box
-              display="flex"
-              flexWrap="wrap"
-              justifyContent="center"
-              alignContent="center"
-              gap="5px"
-            >
-              {info.getValue<string[]>().map((item) => (
-                <Badge key={item}>{item}</Badge>
-              ))}
-            </Box>
-          )
-        },
+        cell: (info) => <BadgesCell items={info.getValue<string[]>()} />,
       },
       {
         accessorKey: 'genderCategory',
         header: '性別',
-        cell: (info) => {
-          return (
-            <Box
-              display="flex"
-              flexWrap="wrap"
-              justifyContent="center"
-              alignContent="center"
-              gap="5px"
-            >
-              {info.getValue<string[]>().map((item) => (
-                <Badge key={item}>{item}</Badge>
-              ))}
-            </Box>
-          )
-        },
+        cell: (info) => <BadgesCell items={info.getValue<string[]>()} />,
       },
       {
         accessorKey: 'ageCategory',
         header: '年齢区分',
-        cell: (info) => {
-          return (
-            <Box
-              display="flex"
-              flexWrap="wrap"
-              justifyContent="center"
-              alignContent="center"
-              gap="5px"
-            >
-              {info.getValue<string[]>().map((item) => (
-                <Badge key={item}>{item}</Badge>
-              ))}
-            </Box>
-          )
-        },
+        cell: (info) => <BadgesCell items={info.getValue<string[]>()} />,
       },
       {
         accessorKey: 'startDate',
