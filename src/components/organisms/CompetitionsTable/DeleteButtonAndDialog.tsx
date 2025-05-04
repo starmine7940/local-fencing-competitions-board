@@ -23,6 +23,7 @@ export const DeleteButtonAndDialog = ({
   handleDelete,
 }: DeleteButtonAndDialogArgs) => {
   const [inputDeleteCode, setInputDeleteCode] = useState<string>('')
+  const cannotSubmit = inputDeleteCode.length === 0
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -61,7 +62,9 @@ export const DeleteButtonAndDialog = ({
                 </Dialog.Body>
                 <Dialog.Footer>
                   <Dialog.ActionTrigger asChild>
-                    <Button type="submit">削除</Button>
+                    <Button type="submit" disabled={cannotSubmit}>
+                      削除
+                    </Button>
                   </Dialog.ActionTrigger>
                 </Dialog.Footer>
                 <Dialog.CloseTrigger asChild>
