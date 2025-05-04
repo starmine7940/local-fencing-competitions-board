@@ -48,9 +48,10 @@ export const DeleteButtonAndDialog = ({
                 <Dialog.Body>
                   <Stack>
                     <Text>
-                      大会名「{selectedCompetitionName}
-                      」の情報を削除してもよいですか？この処理は元に戻せないのでご注意ください。
+                      「{selectedCompetitionName}
+                      」を削除してもよろしいでしょうか？
                     </Text>
+                    <Text>この処理は元に戻せないのでご注意ください。</Text>
                     <Input
                       placeholder="削除コードを入力してください"
                       value={inputDeleteCode}
