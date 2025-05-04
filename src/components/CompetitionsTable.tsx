@@ -41,7 +41,13 @@ export const CompetitionsTable = ({
         header: '種目',
         cell: (info) => {
           return (
-            <Box display="flex" flexWrap="wrap" gap="5px">
+            <Box
+              display="flex"
+              flexWrap="wrap"
+              justifyContent="center"
+              alignContent="center"
+              gap="5px"
+            >
               {info.getValue<string[]>().map((item) => (
                 <Badge key={item}>{item}</Badge>
               ))}
@@ -54,7 +60,13 @@ export const CompetitionsTable = ({
         header: '性別',
         cell: (info) => {
           return (
-            <Box display="flex" flexWrap="wrap" gap="5px">
+            <Box
+              display="flex"
+              flexWrap="wrap"
+              justifyContent="center"
+              alignContent="center"
+              gap="5px"
+            >
               {info.getValue<string[]>().map((item) => (
                 <Badge key={item}>{item}</Badge>
               ))}
@@ -67,7 +79,13 @@ export const CompetitionsTable = ({
         header: '年齢区分',
         cell: (info) => {
           return (
-            <Box display="flex" flexWrap="wrap" gap="5px">
+            <Box
+              display="flex"
+              flexWrap="wrap"
+              justifyContent="center"
+              alignContent="center"
+              gap="5px"
+            >
               {info.getValue<string[]>().map((item) => (
                 <Badge key={item}>{item}</Badge>
               ))}
@@ -78,19 +96,25 @@ export const CompetitionsTable = ({
       {
         accessorKey: 'startDate',
         header: '大会開始日',
-        cell: (info) => formatDateWithoutTime(info.getValue<Date | null>()),
+        cell: (info) => (
+          <Box>{formatDateWithoutTime(info.getValue<Date | null>())}</Box>
+        ),
         sortingFn: 'datetime',
       },
       {
         accessorKey: 'finishDate',
         header: '大会終了日',
-        cell: (info) => formatDateWithoutTime(info.getValue<Date | null>()),
+        cell: (info) => (
+          <Box>{formatDateWithoutTime(info.getValue<Date | null>())}</Box>
+        ),
         sortingFn: 'datetime',
       },
       {
         accessorKey: 'subscriptionDeadlineDate',
         header: '申込締切日',
-        cell: (info) => formatDateWithoutTime(info.getValue<Date | null>()),
+        cell: (info) => (
+          <Box>{formatDateWithoutTime(info.getValue<Date | null>())}</Box>
+        ),
         sortingFn: 'datetime',
       },
       {
@@ -144,7 +168,8 @@ export const CompetitionsTable = ({
                 return (
                   <Table.ColumnHeader
                     key={header.id}
-                    minW='200px'
+                    minW="200px"
+                    textAlign="center"
                     onClick={
                       isSortable
                         ? header.column.getToggleSortingHandler()
@@ -169,10 +194,8 @@ export const CompetitionsTable = ({
           {table.getRowModel().rows.map((row) => (
             <Table.Row id={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <Table.Cell key={cell.id}>
-                  <Box maxW="xl" wordBreak="break-word" whiteSpace="normal">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </Box>
+                <Table.Cell key={cell.id} textAlign="center">
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </Table.Cell>
               ))}
             </Table.Row>

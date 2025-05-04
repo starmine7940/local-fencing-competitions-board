@@ -9,14 +9,12 @@ export const DetailsToggleCell = ({text}: DetailsToggleCellArgs) => {
   const preview = isLong ? text.slice(0, 100) + '...' : text
 
   return (
-    <Box>
+    <Box wordBreak="break-word" whiteSpace="normal">
       <Text>{preview}</Text>
       {isLong && (
         <details>
-          <summary>
-            全文はこちら
-          </summary>
-            <Text>{text}</Text>
+          <summary>全文はこちら</summary>
+          <Text>{text}</Text>
         </details>
       )}
     </Box>
